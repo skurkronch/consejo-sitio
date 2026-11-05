@@ -323,7 +323,7 @@ function cdcSend(data){
 <script>
 (function(){
   /* ---------- opciones ---------- */
-  var INDUSTRIAS=["Consumo masivo","Retail","Alimentos y bebidas","Moda y belleza","Finanzas y seguros","Tecnología","Salud","Educación","Automotriz","Turismo y hospitalidad","Inmobiliario","B2B / industrial"];
+  var INDUSTRIAS=["Alimentos y bebidas","Moda y belleza","Otros productos de consumo masivo","Retail","Finanzas y seguros","Tecnología","Salud","Educación","Automotriz","Turismo y hospitalidad","Inmobiliario","B2B / industrial"];
   var ROLES=["Dirección de marketing","Brand manager","Fundador o dueño","Comunicación / PR","Producto","Agencia o creativo"];
   var RECEPTORES={agencia:"una agencia externa",interno:"mi equipo creativo interno",freelance:"freelancers",ia:"herramientas de IA"};
   /* El encargo casi siempre llega como tarea o síntoma (lazy problem). El prompt obliga a encontrar el problema jugoso. */
@@ -372,7 +372,7 @@ function cdcSend(data){
     ["encargo","receptor","respuesta"].forEach(function(k){var o={encargo:ENCARGOS,receptor:RECEPTORES,respuesta:RESPUESTAS}[k];if(typeof S[k]!=="string"||(S[k]&&!has(o,S[k])))S[k]="";});
     [["personas",PERSONAS],["fallas",FALLAS],["data",DATA]].forEach(function(x){S[x[0]]=Array.isArray(S[x[0]])?S[x[0]].filter(function(k){return has(x[1],k);}):[];});
     if(S.herramienta&&HERRAMIENTAS.indexOf(S.herramienta)<0)S.herramienta="";
-    S.investigar=S.investigar===true;
+    S.investigar=S.investigar===true;if(S.industria==="Consumo masivo")S.industria="Otros productos de consumo masivo";
     ["nombre","rol","empresa","industria","industriaOtra","correo","reto","audiencia"].forEach(function(k){if(typeof S[k]!=="string")S[k]="";});
   })();
   function remember(){try{localStorage.setItem("cdc-toolkit-v2",JSON.stringify({S:S,step:step}));}catch(e){}}
