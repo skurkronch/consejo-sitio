@@ -603,7 +603,7 @@ function cdcSend(data){
   [].forEach.call(document.querySelectorAll(".mbar .seg button"),function(b){b.addEventListener("click",function(){setView(b.dataset.view);});});
   /* swipe firme y horizontal para cambiar de vista */
   var sx=0,sy=0,st=0,tracking=false;
-  bench.addEventListener("touchstart",function(e){if(!isMobile()||e.touches.length!==1)return;var t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();tracking=!e.target.closest("input,textarea,.prompt");},{passive:true});
+  bench.addEventListener("touchstart",function(e){if(!isMobile()||e.touches.length!==1)return;var t=e.touches[0];sx=t.clientX;sy=t.clientY;st=Date.now();tracking=!e.target.closest("input,textarea");},{passive:true});
   bench.addEventListener("touchend",function(e){
     if(!tracking)return;tracking=false;
     var t=e.changedTouches[0],dx=t.clientX-sx,dy=t.clientY-sy,dt=Date.now()-st;
