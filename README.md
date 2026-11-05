@@ -15,3 +15,5 @@ Cada cambio que se sube a `main` se publica solo.
 
 ## Formularios
 Los dos formularios mandan a `formEndpoint` (FormSubmit). El primer envío dispara un correo de activación a la cuenta configurada: hay que confirmarlo una vez.
+
+Última prueba de despliegue automático: 2026-11-05.
