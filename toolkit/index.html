@@ -318,6 +318,14 @@ function cdcSend(data){
   var S={nombre:"",rol:"",empresa:"",industria:"",industriaOtra:"",encargo:"",receptor:"",personas:[],respuesta:"",fallas:[],data:[],herramienta:"",correo:"",contacto:true,reto:""};
   var step=0, unlocked=false, lastFresh=null;
   try{var saved=JSON.parse(localStorage.getItem("cdc-toolkit-v2")||"null");if(saved&&saved.S){Object.assign(S,saved.S);step=Math.min(saved.step||0,6);}}catch(e){}
+  /* limpia respuestas guardadas por versiones anteriores cuyas opciones ya no existen */
+  (function(){
+    function has(o,k){return Object.prototype.hasOwnProperty.call(o,k);}
+    ["encargo","receptor","respuesta"].forEach(function(k){var o={encargo:ENCARGOS,receptor:RECEPTORES,respuesta:RESPUESTAS}[k];if(typeof S[k]!=="string"||(S[k]&&!has(o,S[k])))S[k]="";});
+    [["personas",PERSONAS],["fallas",FALLAS],["data",DATA]].forEach(function(x){S[x[0]]=Array.isArray(S[x[0]])?S[x[0]].filter(function(k){return has(x[1],k);}):[];});
+    if(S.herramienta&&HERRAMIENTAS.indexOf(S.herramienta)<0)S.herramienta="";
+    ["nombre","rol","empresa","industria","industriaOtra","correo","reto"].forEach(function(k){if(typeof S[k]!=="string")S[k]="";});
+  })();
   function remember(){try{localStorage.setItem("cdc-toolkit-v2",JSON.stringify({S:S,step:step}));}catch(e){}}
 
   var STEPS=[
@@ -427,7 +435,7 @@ function cdcSend(data){
   }
 
   /* ---------- captura discreta ---------- */
-  var enviado=null;
+  var enviado=null,startedAt=new Date().toISOString(),docKey=null;
   function capture(){
     var snap={origen:"toolkit-briefs",version:2,paso:step,nombre:S.nombre,rol:S.rol,empresa:S.empresa,industria:industria(),encargo:S.encargo?ENCARGOS[S.encargo].t:"",receptor:S.receptor?RECEPTORES[S.receptor]:"",personas:S.personas.map(function(k){return PERSONAS[k].t;}),respuesta:S.respuesta?RESPUESTAS[S.respuesta].t:"",fallas:S.fallas.map(function(k){return FALLAS[k].t;}),data:S.data.map(function(k){return DATA[k];}),herramienta:S.herramienta,correo:S.correo,compartirConConsejo:unlocked?S.contacto:null,reto:S.reto,desbloqueado:unlocked,iniciado:startedAt,actualizado:new Date().toISOString()};
     if(!snap.desbloqueado||!snap.compartirConConsejo)return; /* solo se envía si la persona decide compartir */
@@ -565,8 +573,8 @@ function cdcSend(data){
   card.addEventListener("submit",function(e){
     e.preventDefault();
     var err=validate();if(err){hint(err,"err");return;}
-    if(step===7){unlocked=true;capture();render();promptEl.scrollTop=0;window.scrollTo({top:0,behavior:"smooth"});return;}
-    if(step>0)capture();
+    if(step===7){unlocked=true;try{capture();}catch(e){console.warn("toolkit: captura",e);}render();promptEl.scrollTop=0;window.scrollTo({top:0,behavior:"smooth"});return;}
+    if(step>0){try{capture();}catch(e){console.warn("toolkit: captura",e);}}
     step++;render();
   });
 
