@@ -526,9 +526,17 @@ function cdcSend(data){
     }
     h.innerHTML=out;
   }
-  document.getElementById("hand").addEventListener("click",function(e){var b=e.target.closest(".mini");if(!b||b.disabled)return;step=+b.dataset.go;render();});
+  document.getElementById("hand").addEventListener("click",function(e){var b=e.target.closest(".mini");if(!b||b.disabled)return;step=+b.dataset.go;render();lift();});
   function hint(t,k){var h=document.getElementById("hint");if(h){h.textContent=t||"";h.dataset.kind=k||"";}}
 
+  /* al cambiar de tarjeta, la lleva al inicio de la pantalla (sobre todo en celular) */
+  function lift(){
+    var top=0;[].forEach.call(document.querySelectorAll("header,nav,.nav"),function(h){var cs=getComputedStyle(h);if((cs.position==="fixed"||cs.position==="sticky")&&h.getBoundingClientRect().top<=1)top=Math.max(top,h.getBoundingClientRect().bottom);});
+    var anchor=card;
+    var y=anchor.getBoundingClientRect().top+window.pageYOffset-top-12;
+    var r=card.getBoundingClientRect();
+    if(r.top<top||r.top>top+80)window.scrollTo({top:Math.max(0,y),behavior:"smooth"});
+  }
   function render(){
     var cardNo=step===0?"Inicio":step>6?"Tu prompt":"Pregunta "+step+" de 6";
     card.innerHTML='<div class="corner" aria-hidden="true"><span>'+cardNo+'</span>'+CORNER+'</div>'+RENDER[step===7?7:step]();
@@ -538,7 +546,7 @@ function cdcSend(data){
     paintProgress();paintPrompt();remember();
     var first=card.querySelector("input[type=text],input[type=email]");
     if(first&&step>0&&window.innerWidth>900)first.focus({preventScroll:true});
-    var back=document.getElementById("back");if(back)back.onclick=function(){step--;render();};
+    var back=document.getElementById("back");if(back)back.onclick=function(){step--;render();lift();};
     var c2=document.getElementById("copy2");if(c2)c2.onclick=doCopy;
     var sh=document.getElementById("share");if(sh)sh.onclick=function(){S.contacto=true;capture();render();};
     var rs=document.getElementById("restart");if(rs)rs.onclick=function(){unlocked=false;step=1;try{localStorage.removeItem("cdc-toolkit-key");}catch(e){}docKey=Date.now().toString(36)+Math.random().toString(36).slice(2,7);try{localStorage.setItem("cdc-toolkit-key",docKey);}catch(e){}startedAt=new Date().toISOString();render();};
@@ -598,7 +606,7 @@ function cdcSend(data){
     var err=validate();if(err){hint(err,"err");return;}
     if(step===7){unlocked=true;try{capture();}catch(e){console.warn("toolkit: captura",e);}render();promptEl.scrollTop=0;window.scrollTo({top:0,behavior:"smooth"});return;}
     if(step>0){try{capture();}catch(e){console.warn("toolkit: captura",e);}}
-    step++;render();
+    step++;render();lift();
   });
 
   function doCopy(){
