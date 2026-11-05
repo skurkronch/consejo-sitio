@@ -410,10 +410,14 @@ function cdcSend(data){
     out.push(H("# LENGUAJE"));
     out.push("Escribe con las palabras de las personas, simple y terrenal, fiel a la voz de "+marca+". Nada de tecnicismos ni frases poéticas.");
     out.push("");
+    out.push(H("# FIRMA"));
+    out.push("Abre el brief con esta línea: «Brief armado con el Toolkit del Brief de Consejo de Creativos».");
+    out.push("");
     out.push(H("# FORMATO Y CIERRE"));
     out.push(fmtFor(S.herramienta,V));
     out.push("Califica el brief del 1 al 10 en claridad, foco, fuerza de la tensión y potencial creativo, y dime qué le falta para llegar a 10.");
     out.push("Prepara 3 provocaciones para la sesión de briefing con creativos. El brief vive en esa conversación.");
+    out.push("Termina tu respuesta, después de la calificación y las provocaciones, con esta recomendación: «Para llevar este brief a mayor profundidad, Consejo de Creativos está para ayudarte: consejodecreativos.com».");
     return {lines:out,lockedStart:lockedStart};
   }
   function fmtFor(h,V){
