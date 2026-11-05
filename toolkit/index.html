@@ -430,7 +430,7 @@ function cdcSend(data){
   var enviado=null;
   function capture(){
     var snap={origen:"toolkit-briefs",version:2,paso:step,nombre:S.nombre,rol:S.rol,empresa:S.empresa,industria:industria(),encargo:S.encargo?ENCARGOS[S.encargo].t:"",receptor:S.receptor?RECEPTORES[S.receptor]:"",personas:S.personas.map(function(k){return PERSONAS[k].t;}),respuesta:S.respuesta?RESPUESTAS[S.respuesta].t:"",fallas:S.fallas.map(function(k){return FALLAS[k].t;}),data:S.data.map(function(k){return DATA[k];}),herramienta:S.herramienta,correo:S.correo,compartirConConsejo:unlocked?S.contacto:null,reto:S.reto,desbloqueado:unlocked,iniciado:startedAt,actualizado:new Date().toISOString()};
-    if(!snap.desbloqueado)return;
+    if(!snap.desbloqueado||!snap.compartirConConsejo)return; /* solo se envía si la persona decide compartir */
     var firma=String(!!snap.compartirConConsejo);
     if(enviado===firma)return;enviado=firma;
     var data={};for(var k in snap){var v=snap[k];data[k]=Array.isArray(v)?v.join(", "):v;}
@@ -446,7 +446,7 @@ function cdcSend(data){
   var D_DATA={ventas:"Cifras, canales, temporadas",crm:"Quién compra y cada cuánto",cuali:"Entrevistas, focus, etnografía",cuanti:"Encuestas y estudios de mercado",social:"Lo que se dice de tu marca",medios:"Qué ha funcionado antes",ninguna:"Empezamos por ordenar"};
   function opts(obj,key,multi){return Object.keys(obj).map(function(k){return chip(obj[k].t,multi?S[key].indexOf(k)>-1:S[key]===k,'data-val="'+k+'"',obj[k].d);}).join("");}
   function actions(nextLabel,canBack){return '<div class="actions"><button class="btn primary" type="submit" id="next">'+nextLabel+'</button>'+(canBack?'<button class="btn link" type="button" id="back">Atrás</button>':'')+'</div><p class="hint" id="hint" role="status"></p>';}
-  var privacy='<p class="privacy">Usamos tus respuestas para armar tu prompt y entender tu reto. Solo las ve el Consejo; nunca las compartimos con terceros.</p>';
+  var privacy='<p class="privacy">Usamos tus respuestas para armar tu prompt. Solo las ve el Consejo de Creativos cuando tú decides compartirlas para trabajar con nosotros.</p>';
 
   var RENDER={
     0:function(){return '<span class="eyebrow">Toolkit del Brief</span><h1>Arma el prompt que convierte a tu IA en <em>tu mejor redactor de briefs</em>.</h1><p class="why">Seis preguntas rápidas. A la derecha vas a ver cómo tu prompt se escribe con cada respuesta. Al final te lo llevas listo para pegar en ChatGPT, Claude, Gemini o la que uses.</p><ul class="intro-list"><li><b>3 min</b><span>Sin registro previo. Contestas con clics.</span></li><li><b>A la medida</b><span>Se ajusta a tu marca, tu data y lo que hoy falla en tus briefs.</span></li><li><b>Hecho por personas</b><span>Usa el método de planning del Consejo: problema real, tensión humana y GET / TO / BY.</span></li></ul>'+actions("Empezar",false);},
