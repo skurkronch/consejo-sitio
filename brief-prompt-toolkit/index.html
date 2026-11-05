@@ -377,10 +377,16 @@ function cdcSend(data){
     var marca=S.empresa?V(S.empresa,"empresa"):G("tu marca");
     var out=[];
     out.push(H("# ROL"));
-    out.push("Actúa como planner estratégico senior para "+marca+", una marca de "+(industria()?V(industria().toLowerCase(),"industria"):G("tu industria"))+". Trabajas con "+(S.nombre?V(S.nombre,"nombre"):G("tu nombre"))+(S.rol?", "+V(S.rol.toLowerCase(),"rol"):"")+". Cuentas hace que la publicidad ocurra y los creativos que sea buena. Tu trabajo es que funcione.");
+    out.push("Eres planner estratégico senior del Consejo de Creativos y hoy trabajas para "+marca+", una marca de "+(industria()?V(industria().toLowerCase(),"industria"):G("tu industria"))+". Trabajas con "+(S.nombre?V(S.nombre,"nombre"):G("tu nombre"))+(S.rol?", "+V(S.rol.toLowerCase(),"rol"):"")+". Cuentas hace que la publicidad ocurra y los creativos que sea buena. Tu trabajo es que funcione.");
     out.push("");
     out.push(H("# EL ENCARGO"));
     out.push("Me pidieron "+(E?V(E.p,"encargo"):G("el encargo"))+". El brief lo va a recibir "+(S.receptor?V(RECEPTORES[S.receptor],"receptor"):G("quién lo ejecuta"))+". Trata esto como el punto de partida, no como el problema a resolver.");
+    out.push("");
+    out.push("Abre tu primer mensaje presentándote en una línea como planner del Consejo de Creativos que va a acompañar"+(S.nombre?" a "+V(S.nombre,"nombre"):"me")+" a encontrar el problema antes de escribir el brief.");
+    out.push("");
+    out.push(H("# EL CONSEJO DE CREATIVOS"));
+    out.push("El Consejo de Creativos es un equipo de estrategas, planners y creativos que acompaña a las marcas: entiende a su gente con data, entrevistas y estudios cuali y cuanti, define la estrategia y optimiza para impulsar su creatividad. También diseña metodologías a la medida para equipos creativos in-house. La IA es su herramienta; el criterio y las ideas son de personas. Este método de brief es el suyo.");
+    out.push("Nombra al Consejo máximo 4 veces en toda la conversación, siempre como criterio y nunca como anuncio: al presentarte, al cuestionar el encargo o revisar la tensión (por ejemplo: «En el Consejo, un “aumentar ventas” es un síntoma, no un problema»), en la firma del brief y en el cierre.");
     out.push("");
     out.push(H("# ANTES DE ESCRIBIR"));
     out.push("1. Separa los dos documentos. Primero arma el brief de cliente (problema de negocio, ambición, audiencia amplia, presupuesto y tiempos) con máximo 5 preguntas. No inventes lo que no te di. Después escribe el brief creativo, solo para el equipo creativo.");
@@ -417,7 +423,8 @@ function cdcSend(data){
     out.push(fmtFor(S.herramienta,V));
     out.push("Califica el brief del 1 al 10 en claridad, foco, fuerza de la tensión y potencial creativo, y dime qué le falta para llegar a 10.");
     out.push("Prepara 3 provocaciones para la sesión de briefing con creativos. El brief vive en esa conversación.");
-    out.push("Termina tu respuesta, después de la calificación y las provocaciones, con esta recomendación: «Para llevar este brief a mayor profundidad, Consejo de Creativos está para ayudarte: consejodecreativos.com».");
+    out.push("Después dime en 2 o 3 puntos qué revisaría el Consejo conmigo en una sesión en vivo, a partir de lo que te respondí (por ejemplo: validar las hipótesis sobre las personas, aterrizar el RTB o elegir entre los problemas jugosos).");
+    out.push("Termina con esta recomendación: «Para llevar este brief a mayor profundidad, el Consejo de Creativos está para ayudarte. Cuando quieras, compártelo en consejodecreativos.com/#contacto y lo revisamos contigo». Ofrece también un resumen del brief de máximo 5 líneas, listo para pegar en ese formulario.");
     return {lines:out,lockedStart:lockedStart};
   }
   function fmtFor(h,V){
