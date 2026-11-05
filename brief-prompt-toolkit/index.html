@@ -267,9 +267,21 @@ input[type=range]{width:100%;accent-color:var(--idea)}
 
 <script>
 function cdcSend(data){
-  var url=(window.CDC_CONFIG||{}).formEndpoint;
+  var c=window.CDC_CONFIG||{},url=c.formEndpoint,body={};
+  for(var k in data)body[k]=data[k];
+  if(c.web3formsKey){
+    /* Web3Forms: usa sus nombres de campo para asunto y responder a */
+    url="https://api.web3forms.com/submit";
+    body.access_key=c.web3formsKey;
+    if(body._subject){body.subject=body._subject;delete body._subject;}
+    if(body._replyto){body.replyto=body._replyto;delete body._replyto;}
+    body.from_name="Sitio Consejo de Creativos";
+  }
   if(!url)return Promise.reject({code:'sin_endpoint'});
-  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)}).then(function(r){if(!r.ok)throw{code:'http_'+r.status};return r;});
+  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)}).then(function(r){
+    if(!r.ok)throw{code:'http_'+r.status};
+    return r.json().catch(function(){return {};}).then(function(j){if(j&&(j.success===false||j.success==="false"))throw{code:'rechazado',message:j.message};return r;});
+  });
 }
 </script>
 <script>
