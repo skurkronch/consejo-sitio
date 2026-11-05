@@ -1,4 +1,16 @@
 {
   "cleanUrls": true,
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/toolkit",
+      "destination": "/brief-prompt-toolkit/",
+      "permanent": true
+    },
+    {
+      "source": "/toolkit/",
+      "destination": "/brief-prompt-toolkit/",
+      "permanent": true
+    }
+  ]
 }

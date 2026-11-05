@@ -3,7 +3,7 @@
 Sitio estático (sin build). Vercel lo publica tal cual.
 
 - `index.html` · la landing
-- `toolkit/index.html` · Toolkit del Brief
+- `brief-prompt-toolkit/index.html` · Toolkit del Brief
 - `config.js` · adónde llegan los formularios
 - `favicon.svg`, `og.png` · ícono e imagen para compartir
 
