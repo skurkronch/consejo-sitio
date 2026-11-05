@@ -363,7 +363,7 @@ function cdcSend(data){
   var HERRAMIENTAS=["ChatGPT","Claude","Gemini","Copilot","Otra"];
 
   /* ---------- estado ---------- */
-  var S={nombre:"",rol:"",empresa:"",industria:"",industriaOtra:"",encargo:"",receptor:"",personas:[],respuesta:"",fallas:[],data:[],herramienta:"",correo:"",contacto:true,reto:""};
+  var S={nombre:"",rol:"",empresa:"",industria:"",industriaOtra:"",encargo:"",receptor:"",personas:[],audiencia:"",investigar:false,respuesta:"",fallas:[],data:[],herramienta:"",correo:"",contacto:true,reto:""};
   var step=0, unlocked=false, lastFresh=null;
   try{var saved=JSON.parse(localStorage.getItem("cdc-toolkit-v2")||"null");if(saved&&saved.S){Object.assign(S,saved.S);step=Math.min(saved.step||0,6);}}catch(e){}
   /* limpia respuestas guardadas por versiones anteriores cuyas opciones ya no existen */
@@ -372,7 +372,8 @@ function cdcSend(data){
     ["encargo","receptor","respuesta"].forEach(function(k){var o={encargo:ENCARGOS,receptor:RECEPTORES,respuesta:RESPUESTAS}[k];if(typeof S[k]!=="string"||(S[k]&&!has(o,S[k])))S[k]="";});
     [["personas",PERSONAS],["fallas",FALLAS],["data",DATA]].forEach(function(x){S[x[0]]=Array.isArray(S[x[0]])?S[x[0]].filter(function(k){return has(x[1],k);}):[];});
     if(S.herramienta&&HERRAMIENTAS.indexOf(S.herramienta)<0)S.herramienta="";
-    ["nombre","rol","empresa","industria","industriaOtra","correo","reto"].forEach(function(k){if(typeof S[k]!=="string")S[k]="";});
+    S.investigar=S.investigar===true;
+    ["nombre","rol","empresa","industria","industriaOtra","correo","reto","audiencia"].forEach(function(k){if(typeof S[k]!=="string")S[k]="";});
   })();
   function remember(){try{localStorage.setItem("cdc-toolkit-v2",JSON.stringify({S:S,step:step}));}catch(e){}}
 
@@ -433,7 +434,16 @@ function cdcSend(data){
     out.push(H("# LAS PERSONAS"));
     var conocidas=S.personas.map(function(k){return PERSONAS[k].p;});
     var faltan=Object.keys(PERSONAS).filter(function(k){return k!=="demo"&&S.personas.indexOf(k)<0;}).map(function(k){return PERSONAS[k].p;});
-    out.push("Lo que sé de ellas: "+(conocidas.length?V(conocidas.join("; "),"personas"):G("lo que sabes de tu audiencia"))+". "+(faltan.length&&S.personas.length?"Pregúntame o completa como HIPÓTESIS: "+V(faltan.join("; "),"personas")+". ":"")+"Descríbelas como personas reales, no como un rango de edad.");
+    var faltanTodo=Object.keys(PERSONAS).filter(function(k){return S.personas.indexOf(k)<0;}).map(function(k){return PERSONAS[k].p;});
+    if(S.audiencia)out.push("Lo que sé de ellas"+(conocidas.length?" ("+V(conocidas.join("; "),"personas")+")":"")+": «"+V(S.audiencia,"personas")+"».");
+    else if(conocidas.length)out.push("Sé de su "+V(conocidas.join("; "),"personas")+", pero no te lo he detallado. Antes de describirlas, pídeme esos datos en una sola pregunta.");
+    else out.push("Lo que sé de ellas: "+G("lo que sabes de tu audiencia")+".");
+    if(S.investigar){
+      out.push("Investiga mi audiencia. "+(faltanTodo.length?"Busca y propón una respuesta para lo que no sé: "+V(faltanTodo.join("; "),"personas")+". ":"")+(conocidas.length?"Complementa con datos lo que sí sé. ":"")+"Usa fuentes públicas confiables (oficinas de estadística de mi país, estudios de mercado, reportes de la industria y conversación en redes) y cita cada fuente. Marca todo lo investigado como HIPÓTESIS POR VALIDAR. Si no puedes navegar en internet, dímelo y propón hipótesis con lo que sabes de la categoría.");
+    } else if(faltan.length&&S.personas.length){
+      out.push("Pregúntame o completa como HIPÓTESIS: "+V(faltan.join("; "),"personas")+".");
+    }
+    out.push("Descríbelas como personas reales, no como un rango de edad.");
     out.push("");
     out.push(H("# CUIDADO ESPECIAL"));
     if(S.fallas.length){S.fallas.forEach(function(k){out.push("- "+V(FALLAS[k].r,"fallas"));});}
@@ -476,7 +486,7 @@ function cdcSend(data){
   function precision(){
     var p=0;
     if(S.nombre)p+=6;if(S.rol)p+=4;if(S.empresa)p+=8;if(industria())p+=8;if(S.encargo)p+=14;if(S.receptor)p+=6;
-    if(S.personas.length)p+=Math.min(12,3*S.personas.length);if(S.respuesta)p+=10;
+    if(S.personas.length)p+=Math.min(12,3*S.personas.length);if(S.respuesta)p+=10;if(S.audiencia)p+=4;if(S.investigar)p+=2;
     if(S.fallas.length)p+=Math.min(15,5*S.fallas.length);if(S.data.length)p+=8;if(S.herramienta)p+=4;if(step>=6)p+=5;
     return Math.min(100,p);
   }
@@ -496,7 +506,7 @@ function cdcSend(data){
   /* ---------- captura discreta ---------- */
   var enviado=null,startedAt=new Date().toISOString(),docKey=null;
   function capture(){
-    var snap={origen:"toolkit-briefs",version:2,paso:step,nombre:S.nombre,rol:S.rol,empresa:S.empresa,industria:industria(),encargo:S.encargo?ENCARGOS[S.encargo].t:"",receptor:S.receptor?RECEPTORES[S.receptor]:"",personas:S.personas.map(function(k){return PERSONAS[k].t;}),respuesta:S.respuesta?RESPUESTAS[S.respuesta].t:"",fallas:S.fallas.map(function(k){return FALLAS[k].t;}),data:S.data.map(function(k){return DATA[k];}),herramienta:S.herramienta,correo:S.correo,compartirConConsejo:unlocked?S.contacto:null,reto:S.reto,desbloqueado:unlocked,iniciado:startedAt,actualizado:new Date().toISOString()};
+    var snap={origen:"toolkit-briefs",version:2,paso:step,nombre:S.nombre,rol:S.rol,empresa:S.empresa,industria:industria(),encargo:S.encargo?ENCARGOS[S.encargo].t:"",receptor:S.receptor?RECEPTORES[S.receptor]:"",personas:S.personas.map(function(k){return PERSONAS[k].t;}),audiencia:S.audiencia,investigarAudiencia:S.investigar,respuesta:S.respuesta?RESPUESTAS[S.respuesta].t:"",fallas:S.fallas.map(function(k){return FALLAS[k].t;}),data:S.data.map(function(k){return DATA[k];}),herramienta:S.herramienta,correo:S.correo,compartirConConsejo:unlocked?S.contacto:null,reto:S.reto,desbloqueado:unlocked,iniciado:startedAt,actualizado:new Date().toISOString()};
     if(!snap.desbloqueado||!snap.compartirConConsejo)return; /* solo se envía si la persona decide compartir */
     var firma=String(!!snap.compartirConConsejo);
     if(enviado===firma)return;enviado=firma;
@@ -520,7 +530,7 @@ function cdcSend(data){
     1:function(){return '<h2>Para empezar, ¿cómo te llamas?</h2><p class="why">Tu prompt va a hablarle a la IA <b>como si fueras tú</b>. Con tu nombre y tu rol sabe a quién le está escribiendo.</p><label class="field" for="i-nombre"><span>Tu nombre</span><input type="text" id="i-nombre" autocomplete="given-name" maxlength="80" value="'+esc(S.nombre)+'" placeholder="Ej. Mariana"></label><div class="field"><span>Tu rol</span><div class="chips sm" data-single="rol">'+ROLES.map(function(r){return chip(r,S.rol===r,'data-val="'+esc(r)+'"');}).join("")+'</div></div>'+actions("Siguiente",true)+privacy;},
     2:function(){var n=S.nombre?esc(S.nombre.split(" ")[0])+", ¿":"¿";return '<h2>'+n+'para qué marca escribes los briefs?</h2><p class="why">Un brief bueno nace del <b>contexto de la marca</b>. La industria le dice a la IA qué reglas del juego aplican.</p><label class="field" for="i-empresa"><span>Marca o empresa</span><input type="text" id="i-empresa" autocomplete="organization" maxlength="100" value="'+esc(S.empresa)+'" placeholder="Ej. Café Altura"></label><div class="field"><span>Industria</span><div class="chips sm" data-single="industria">'+INDUSTRIAS.concat(["Otra"]).map(function(r){return chip(r,S.industria===r,'data-val="'+esc(r)+'"');}).join("")+'</div></div><label class="field" for="i-otra" '+(S.industria==="Otra"?"":"hidden")+' id="otra-wrap"><span>¿Cuál?</span><input type="text" id="i-otra" maxlength="60" value="'+esc(S.industriaOtra)+'"></label>'+actions("Siguiente",true);},
     3:function(){return '<h2>¿Qué te pidieron?</h2><p class="why">Casi siempre el encargo llega como <b>tarea o síntoma</b>: “sube ventas”, “haz un video”. Tu prompt va a obligar a la IA a encontrar el problema real detrás antes de escribir.</p><div class="field"><span>El encargo</span><div class="chips" data-single="encargo">'+opts(ENCARGOS,"encargo")+'</div></div><div class="field"><span>Quién recibe el brief</span><div class="chips" data-single="receptor">'+Object.keys(RECEPTORES).map(function(k){var l={agencia:"Agencia externa",interno:"Equipo interno",freelance:"Freelancers",ia:"Herramientas de IA"}[k];return chip(l,S.receptor===k,'data-val="'+k+'"',D_REC[k]);}).join("")+'</div></div>'+actions("Siguiente",true);},
-    4:function(){return '<h2>¿Qué sabes de las personas a las que les hablas?</h2><p class="why">Las estrategias que funcionan entienden a <b>personas, no rangos de edad</b>. Marca lo que ya conoces; lo que falte, la IA te lo va a preguntar.</p><div class="field"><span>Lo que ya sabes</span><div class="chips" data-multi="personas">'+opts(PERSONAS,"personas",true)+'</div></div><div class="field"><span>Qué quieres lograr en ellas</span><div class="chips" data-single="respuesta">'+opts(RESPUESTAS,"respuesta")+'</div></div>'+actions("Siguiente",true);},
+    4:function(){return '<h2>¿Qué sabes de las personas a las que les hablas?</h2><p class="why">Las estrategias que funcionan entienden a <b>personas, no rangos de edad</b>. Marca lo que ya conoces; lo que falte, la IA te lo puede preguntar o investigar.</p><div class="field"><span>Lo que ya sabes</span><div class="chips" data-multi="personas">'+opts(PERSONAS,"personas",true)+'</div></div><label class="field" for="i-audiencia"><span>Cuéntanos lo que sabes <small>(opcional)</small></span><textarea id="i-audiencia" rows="3" maxlength="800" placeholder="Ej. Mujeres de 28 a 45, NSE C+, compran en el súper cada semana y sienten que no tienen tiempo para cocinar.">'+esc(S.audiencia)+'</textarea></label><label class="check" for="i-investigar"><input type="checkbox" id="i-investigar" '+(S.investigar?"checked":"")+'><span>Quiero que mi prompt investigue lo que falta de mi audiencia y complete lo que ya sé con datos.</span></label><div class="field"><span>Qué quieres lograr en ellas</span><div class="chips" data-single="respuesta">'+opts(RESPUESTAS,"respuesta")+'</div></div>'+actions("Siguiente",true);},
     5:function(){return '<h2>Sé honesto: ¿qué suele fallar en tus briefs?</h2><p class="why">Esta es la parte que más mejora tu prompt. Cada respuesta se vuelve <b>una regla que la IA va a cuidar</b> por ti.</p><div class="field"><span>Elige hasta 3</span><div class="chips" data-multi="fallas" data-max="3">'+opts(FALLAS,"fallas",true)+'</div></div>'+actions("Siguiente",true);},
     6:function(){return '<h2>¿Con qué material cuentas?</h2><p class="why">En el Consejo empezamos siempre por <b>entender</b>: tu data, la nuestra, entrevistas, lo cuali y lo cuanti. Tu prompt le va a pedir a la IA que la use y que te avise cuando algo sea solo una hipótesis.</p><div class="field"><span>Tu data</span><div class="chips" data-multi="data">'+Object.keys(DATA).map(function(k){var l={ventas:"Ventas",crm:"CRM / clientes",cuali:"Estudios cuali",cuanti:"Encuestas cuanti",social:"Social listening",medios:"Resultados de campañas",ninguna:"Nada ordenado aún"}[k];return chip(l,S.data.indexOf(k)>-1,'data-val="'+k+'"',D_DATA[k]);}).join("")+'</div></div><div class="field"><span>¿Qué IA usas más?</span><div class="chips sm" data-single="herramienta">'+HERRAMIENTAS.map(function(r){return chip(r,S.herramienta===r,'data-val="'+r+'"');}).join("")+'</div></div>'+actions("Ver mi prompt",true);},
     7:function(){
@@ -634,6 +644,8 @@ function cdcSend(data){
     else if(t.id==="i-otra"){S.industriaOtra=t.value.trim();lastFresh="industria";}
     else if(t.id==="i-correo"){S.correo=t.value.trim();return;}
     else if(t.id==="i-reto"){S.reto=t.value.trim();return;}
+    else if(t.id==="i-audiencia"){S.audiencia=t.value.trim();lastFresh="personas";}
+    else if(t.id==="i-investigar"){S.investigar=t.checked;lastFresh="personas";}
     else if(t.id==="i-contacto"){S.contacto=t.checked;return;}
     else return;
     paintPrompt();
