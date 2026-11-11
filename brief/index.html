@@ -288,6 +288,11 @@ fieldset.campo legend{padding:0;margin-bottom:9px;display:flex;flex-wrap:wrap;ga
 .enlace:hover{color:var(--tinta)}
 .status ul{margin:.4rem 0 0;padding-left:1.1rem}
 .status a{font-weight:600}
+.envio .enlace{justify-self:start}
+.aviso{display:grid;gap:.9rem;padding:1rem 1.1rem;border-radius:var(--radio-opcion);border:1.5px solid var(--error);background:color-mix(in srgb,var(--error) 7%,var(--cara))}
+.aviso p{font-size:15px;line-height:1.5;max-width:none}
+.btn.peligro{border-color:var(--error);color:var(--error)}
+.btn.peligro:hover{background:var(--error);color:var(--cara)}
 /* barra fija de envío */
 body{padding-bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
 .barra-envio{position:fixed;left:0;right:0;bottom:0;z-index:30;background:color-mix(in srgb,var(--papel) 88%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-top:1px solid var(--linea);box-shadow:0 -14px 30px -26px rgba(120,90,160,.55);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -404,10 +409,15 @@ body{padding-bottom:calc(5.5rem + env(safe-area-inset-bottom,0px))}
   <div class="envio">
     <p class="ayuda" id="e-resumen">Revisa los campos marcados como Sugerido antes de enviar.</p>
     <div class="acciones">
+      <button class="btn principal" type="button" id="e-enviar-2">Enviar brief</button>
       <button class="btn secundario" type="button" id="e-copiar">Copiar como texto</button>
     </div>
     <p class="status" id="c-status" role="status" aria-live="polite"></p>
-    <button class="enlace" type="button" id="e-borrar">Borrar todo y empezar de nuevo</button>
+    <button class="enlace" type="button" id="e-borrar" aria-expanded="false" aria-controls="aviso-borrar">Volver a iniciar</button>
+    <div class="aviso" id="aviso-borrar" role="alertdialog" aria-labelledby="aviso-t" hidden>
+      <p id="aviso-t"><b>¿Volver a iniciar?</b> Se borrará todo lo que llenaste, incluida tu historia o audio transcrito. No se puede deshacer.</p>
+      <div class="acciones"><button class="btn secundario peligro" type="button" id="aviso-si">Sí, borrar todo</button><button class="btn secundario" type="button" id="aviso-no">Cancelar</button></div>
+    </div>
   </div>
 </div></section>
 <div class="barra-envio" role="region" aria-label="Enviar brief"><div class="wrap">
@@ -625,8 +635,10 @@ function cdcSend(data){
   }
 
   /* enviar */
-  var eBtn=document.getElementById('e-enviar');
-  eBtn.addEventListener('click',function(){
+  var eBtns=[document.getElementById('e-enviar'),document.getElementById('e-enviar-2')];
+  function ocupado(on){eBtns.forEach(function(b){b.disabled=on;});}
+  function aviso(t,k){decir(eStatus,t,k);decir(cStatus,t,k);}
+  function enviar(){
     var malos=validar();
     if(malos.length){
       eStatus.dataset.kind='err';eStatus.innerHTML='Falta'+(malos.length>1?'n':'')+': <ul>'+malos.map(function(c){return '<li><a href="#b-'+c.k+'">'+esc(c.l)+'</a></li>';}).join('')+'</ul>';
@@ -636,11 +648,12 @@ function cdcSend(data){
     CAMPOS.forEach(function(c){if(vacio(c.k))return;var v=get(c.k);d[c.sec.n+' '+c.l]=(Array.isArray(v)?v.join(', '):v)+(sugeridos[c.k]?' [sugerido, sin editar]':'');});
     if(hTexto.value.trim())d['Historia original']=hTexto.value.trim();
     d['Brief en texto']=comoTexto();
-    eBtn.disabled=true;decir(eStatus,'Enviando…');
-    cdcSend(d).then(function(){decir(eStatus,'Listo, '+get('nombre').split(' ')[0]+'. Recibimos tu brief y te escribimos a '+get('correo')+' para afinarlo contigo.','ok');})
-    .catch(function(){decir(eStatus,'No se pudo enviar. Revisa tu conexión e intenta de nuevo, o usa “Copiar como texto” y mándanoslo por correo.','err');})
-    .then(function(){eBtn.disabled=false;});
-  });
+    ocupado(true);aviso('Enviando…');
+    cdcSend(d).then(function(){aviso('Listo, '+get('nombre').split(' ')[0]+'. Recibimos tu brief y te escribimos a '+get('correo')+' para afinarlo contigo.','ok');})
+    .catch(function(){aviso('No se pudo enviar. Revisa tu conexión e intenta de nuevo, o usa “Copiar como texto” y mándanoslo por correo.','err');})
+    .then(function(){ocupado(false);});
+  }
+  eBtns.forEach(function(b){b.addEventListener('click',enviar);});
 
   /* copiar */
   document.getElementById('e-copiar').addEventListener('click',function(){
@@ -650,15 +663,18 @@ function cdcSend(data){
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(listo,plan);else plan();
   });
 
-  /* borrar */
-  var eBorrar=document.getElementById('e-borrar'),armado=false,tArm=0;
-  eBorrar.addEventListener('click',function(){
-    if(!armado){armado=true;eBorrar.textContent='Toca otra vez para borrar todo';clearTimeout(tArm);tArm=setTimeout(function(){armado=false;eBorrar.textContent='Borrar todo y empezar de nuevo';},4000);return;}
-    armado=false;clearTimeout(tArm);eBorrar.textContent='Borrar todo y empezar de nuevo';
-    CAMPOS.forEach(function(c){set(c.k,c.multi?[]:'');marcar(c.k,false);});hTexto.value='';cuenta();hRes.hidden=true;
+  /* volver a iniciar, con aviso */
+  var eBorrar=document.getElementById('e-borrar'),avisoB=document.getElementById('aviso-borrar');
+  function cerrarAviso(){avisoB.hidden=true;eBorrar.setAttribute('aria-expanded','false');}
+  eBorrar.addEventListener('click',function(){avisoB.hidden=false;eBorrar.setAttribute('aria-expanded','true');document.getElementById('aviso-no').focus();});
+  document.getElementById('aviso-no').addEventListener('click',function(){cerrarAviso();eBorrar.focus();});
+  document.getElementById('aviso-si').addEventListener('click',function(){
+    if(grabando)parar();clearTimeout(tGuardar);
+    CAMPOS.forEach(function(c){set(c.k,c.multi?[]:'');marcar(c.k,false);});hTexto.value='';cuenta();hRes.hidden=true;decir(hStatus,'');
     try{localStorage.removeItem(CLAVE);}catch(e){}
-    validar();CAMPOS.forEach(function(c){var el=document.getElementById('b-'+c.k+'-err');if(el)el.hidden=true;var f=form.elements[c.k];if(f&&f.removeAttribute)f.removeAttribute('aria-invalid');});
-    avance();decir(eStatus,'');decir(cStatus,'Listo, empezamos de cero.');
+    CAMPOS.forEach(function(c){var el=document.getElementById('b-'+c.k+'-err');if(el)el.hidden=true;var f=form.elements[c.k];if(f&&f.removeAttribute)f.removeAttribute('aria-invalid');});
+    cerrarAviso();avance();decir(eStatus,'');decir(cStatus,'');
+    window.scrollTo({top:0,behavior:'smooth'});
   });
 })();
 (function(){
