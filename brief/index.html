@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Envía tu brief · Consejo de Creativos</title>
+<meta name="description" content="Cuéntanos tu proyecto antes de cotizarlo. Llena el brief a tu ritmo o cuéntalo con tus palabras y lo llenamos por ti.">
+<meta property="og:title" content="Envía tu brief · Consejo de Creativos">
+<meta property="og:description" content="Cuéntanos tu proyecto antes de cotizarlo. Llena el brief a tu ritmo o cuéntalo con tus palabras y lo llenamos por ti.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script src="/config.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,800;1,500&display=swap">
+<style>
+/* Layout: pocas secciones con mucho aire, como mesa abierta. Portada perla con el isotipo vivo, bloques cortos, lista de formatos y trabajos, y Ondas tornasol al pie con el formulario. */
+:root{
+  --papel:#fbf9f7;--papel-2:#f3eff5;--cara:#ffffff;--hoja:#f1ebf7;
+  --tinta:#17191c;--tinta-suave:#5b5866;--hoja-tinta:#17191c;--hoja-suave:#57546a;
+  --idea:#e59e1e;--idea-brillo:#f5c04e;--idea-texto:#8a5a06;--idea-lavado:#fbe8bd;--sobre-idea:#17191c;
+  --linea:#e4dee8;--linea-fuerte:#847f8f;--foco:#17191c;--error:#a3361f;
+  --tornasol-oro:#f5c04e;--tornasol-coral:#f59a7e;--tornasol-rosa:#efb3d7;--tornasol-lila:#b4a6f0;--tornasol-agua:#8edacf;
+  --sombra-carta:0 24px 44px -28px rgba(120,90,160,.35);
+  --sombra-elegida:0 14px 24px -14px rgba(200,120,150,.45);
+  --radio-campo:6px;--radio-hoja:8px;--radio-opcion:10px;--radio-carta:16px;--radio-pildora:999px;
+  --f:"Plus Jakarta Sans","Helvetica Neue",Arial,sans-serif;
+  --xl:clamp(2.6rem,1.6rem + 4.2vw,4.5rem);
+  --l:clamp(2rem,1.4rem + 2.4vw,3rem);
+  --tit:clamp(1.4rem,1.2rem + .8vw,2rem);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --papel:#141319;--papel-2:#1b1a22;--cara:#201f28;--hoja:#24222d;
+  --tinta:#f4f1f7;--tinta-suave:#b0abbd;--hoja-tinta:#f4f1f7;--hoja-suave:#b5b0c2;
+  --idea-brillo:#f7c95f;--idea-texto:#f5c04e;--idea-lavado:#3b3020;
+  --linea:#34313e;--linea-fuerte:#74707f;--foco:#f4f1f7;--error:#f2937a;
+  --sombra-carta:0 22px 40px -24px rgba(0,0,0,.7);--sombra-elegida:0 12px 20px -12px rgba(0,0,0,.7);color-scheme:dark}}
+:root[data-theme="dark"]{
+  --papel:#141319;--papel-2:#1b1a22;--cara:#201f28;--hoja:#24222d;
+  --tinta:#f4f1f7;--tinta-suave:#b0abbd;--hoja-tinta:#f4f1f7;--hoja-suave:#b5b0c2;
+  --idea-brillo:#f7c95f;--idea-texto:#f5c04e;--idea-lavado:#3b3020;
+  --linea:#34313e;--linea-fuerte:#74707f;--foco:#f4f1f7;--error:#f2937a;
+  --sombra-carta:0 22px 40px -24px rgba(0,0,0,.7);--sombra-elegida:0 12px 20px -12px rgba(0,0,0,.7);color-scheme:dark}
+:root{
+  --cc-tornasol:linear-gradient(115deg,var(--tornasol-oro) 0%,var(--tornasol-coral) 28%,var(--tornasol-rosa) 52%,var(--tornasol-lila) 76%,var(--tornasol-agua) 100%);
+  --cc-perla:
+    radial-gradient(90% 120% at 0% 0%,color-mix(in srgb,var(--tornasol-oro) 38%,transparent),transparent 60%),
+    radial-gradient(80% 110% at 100% 0%,color-mix(in srgb,var(--tornasol-lila) 40%,transparent),transparent 62%),
+    radial-gradient(90% 120% at 100% 100%,color-mix(in srgb,var(--tornasol-agua) 34%,transparent),transparent 60%),
+    radial-gradient(80% 120% at 0% 100%,color-mix(in srgb,var(--tornasol-rosa) 40%,transparent),transparent 62%),
+    var(--hoja);
+}
+.logo-dark{display:none}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .logo-light{display:none}:root:not([data-theme="light"]) .logo-dark{display:block}}
+:root[data-theme="dark"] .logo-light{display:none}:root[data-theme="dark"] .logo-dark{display:block}
+
+*{box-sizing:border-box}
+body{background:var(--papel);color:var(--tinta);font-family:var(--f);font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:72rem;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{margin:0;font-weight:800;letter-spacing:-.035em;line-height:1;text-wrap:balance}
+h2{font-size:var(--l)}
+h3{font-size:22px;font-weight:600;letter-spacing:-.01em;line-height:1.25}
+h1 em,h2 em{font-style:normal;color:var(--idea-texto)}
+p{margin:0;max-width:60ch}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--foco);outline-offset:2px;border-radius:2px}
+.k{font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.dato{font-size:14px;font-weight:500;color:var(--tinta-suave)}
+
+/* botón */
+.btn{font-family:var(--f);font-weight:600;font-size:16px;line-height:1.2;padding:14px 22px;border-radius:var(--radio-pildora);border:1.5px solid var(--tinta);background:transparent;color:var(--tinta);cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:background .15s,transform .2s}
+.btn:hover{transform:translateY(-1px)}
+.btn.principal{background:var(--cc-tornasol);background-size:180% 100%;background-position:0% 50%;border-color:transparent;color:var(--sobre-idea);box-shadow:var(--sombra-elegida);transition:background-position .6s ease,transform .2s}
+.btn.principal:hover{background-position:100% 50%}
+.btn.secundario:hover{background:var(--tinta);color:var(--papel)}
+.btn:disabled{opacity:.45;cursor:wait;transform:none}
+
+/* borrador + nav */
+.draft{background:var(--papel-2);color:var(--tinta-suave);font-size:13px;font-weight:500;border-bottom:1px solid var(--linea)}
+.draft .wrap{padding-block:.5rem;display:flex;gap:.4rem 1rem;flex-wrap:wrap;justify-content:space-between}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1.1rem;flex-wrap:wrap}
+.brand{display:inline-flex;color:var(--tinta)}
+.brand .logo{height:68px;width:auto;display:block;shape-rendering:geometricPrecision}@media (max-width:640px){.brand .logo{height:56px}}
+.navlinks{display:flex;gap:1.6rem;font-size:15px;font-weight:600;flex-wrap:wrap}
+.navlinks a{text-decoration:none;color:var(--tinta-suave)}
+.navlinks a:hover{color:var(--tinta)}
+
+/* símbolo */
+.cc-simbolo{display:block;overflow:visible}
+.cc-asiento{fill:var(--tinta)}
+.cc-idea{fill:var(--idea)}
+.cc-halo,.cc-chispa{transform-box:view-box;transform-origin:151.4px 168.7px;pointer-events:none}
+.cc-halo{fill:var(--idea-brillo);filter:blur(24px);opacity:.35;animation:cc-halo 3.6s ease-in-out infinite}
+.cc-brilla .cc-idea{animation:cc-idea 3.6s ease-in-out infinite}
+.cc-chispa{fill:#fff;opacity:0;transform-origin:140px 156px;animation:cc-chispa 3.6s ease-in-out infinite}
+@keyframes cc-halo{0%,100%{opacity:.12;transform:scale(.8)}42%{opacity:.8;transform:scale(1.45)}60%{opacity:.5;transform:scale(1.25)}}
+@keyframes cc-idea{0%,100%{fill:var(--idea)}42%{fill:var(--idea-brillo)}}
+@keyframes cc-chispa{0%,30%,70%,100%{opacity:0;transform:scale(.4)}42%{opacity:.9;transform:scale(1)}}
+
+/* portada */
+.portada .wrap{padding-block:1rem 4.5rem}
+.losa{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:2rem 3rem;align-items:center;padding:clamp(1.6rem,4vw,4rem);border-radius:24px;background:var(--cc-perla);border:1px solid var(--linea)}
+.losa-copy{display:grid;gap:1.4rem;min-width:0}
+.promo{justify-self:start;display:inline-flex;align-items:center;gap:10px;max-width:100%;padding:5px 14px 5px 5px;border-radius:var(--radio-pildora);background:color-mix(in srgb,var(--cara) 82%,transparent);border:1px solid var(--linea);box-shadow:var(--sombra-carta);color:var(--tinta);text-decoration:none;font-size:14px;font-weight:500;line-height:1.3;transition:transform .2s,border-color .2s}
+.promo:hover{transform:translateY(-1px);border-color:var(--linea-fuerte)}
+.promo-sello{flex:none;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:var(--radio-pildora);background:var(--cc-tornasol);color:var(--sobre-idea)}
+.promo b{font-weight:800}
+.promo-f{flex:none;transition:transform .2s}.promo:hover .promo-f{transform:translateX(3px)}
+.promo:focus-visible{outline:2px solid var(--foco);outline-offset:3px}
+.losa h1{font-size:var(--xl);line-height:.95}
+.entrada{font-size:20px;line-height:1.5;letter-spacing:-.01em;color:var(--hoja-suave);max-width:36ch}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.losa .cc-simbolo{width:min(100%,300px);justify-self:center;height:auto}
+
+/* secciones */
+section.s .wrap{padding-block:clamp(3rem,7vw,4.5rem)}
+section.s + section.s .wrap{border-top:1px solid var(--linea)}
+.cab{display:grid;gap:.8rem;margin-bottom:2.4rem}
+.cab p{color:var(--tinta-suave);font-size:19px;line-height:1.5}
+
+/* manifiesto */
+.manifiesto p{font-size:var(--tit);font-weight:600;line-height:1.3;letter-spacing:-.015em;max-width:30ch;text-wrap:balance}
+.manifiesto p + p{margin-top:.8rem}
+.manifiesto em{font-style:normal;background:linear-gradient(transparent 62%,var(--idea-lavado) 62%)}
+
+/* qué hacemos */
+.pilares{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2rem}
+.pilar{display:grid;gap:.6rem;align-content:start;padding:1.6rem;background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta)}
+.pilar:nth-child(odd){transform:rotate(-.5deg)}.pilar:nth-child(even){transform:rotate(.5deg)}
+.pilar .n{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--idea-texto)}
+.pilar p{font-size:15px;line-height:1.6;color:var(--tinta-suave)}
+.fuentes{margin-top:2rem;display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:center}
+
+/* etiquetas */
+.etq{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.etq li{font-size:12px;font-weight:600;letter-spacing:.04em;padding:4px 10px;border-radius:var(--radio-pildora);border:1px solid var(--linea-fuerte);background:var(--cara);white-space:nowrap}
+
+/* lista (Trabajos) */
+.lista{list-style:none;margin:0;padding:0;border-top:1px solid var(--linea)}
+.item{display:grid;grid-template-columns:9rem minmax(0,1fr) auto 1.5rem;gap:12px 24px;align-items:center;padding:22px 16px;border-bottom:1px solid var(--linea);text-decoration:none;color:var(--tinta);border-radius:var(--radio-opcion);transition:background .3s}
+a.item:hover{background:var(--cc-perla)}
+.item-k{font-size:14px;font-weight:500;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.item-main{display:grid;gap:4px;min-width:0}
+.item-t{font-weight:800;font-size:24px;line-height:1.15;letter-spacing:-.02em;justify-self:start;background:var(--cc-tornasol) no-repeat left bottom/0% 4px;transition:background-size .4s ease;padding-bottom:2px}
+a.item:hover .item-t{background-size:100% 4px}
+.item-l{font-size:16px;line-height:1.45;color:var(--tinta-suave)}
+.item .etq{justify-content:flex-end}
+.item-f{font-size:20px;color:var(--tinta-suave);transition:transform .3s}
+a.item:hover .item-f{transform:translateX(4px);color:var(--tinta)}
+.nota{margin-top:1rem}
+
+/* cobro */
+.cobro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:1.5rem 3rem;align-items:start}
+.cobro ul{list-style:none;margin:0;padding:0;display:grid;gap:.9rem}
+.cobro li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline;font-size:17px}
+.cobro li::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--idea);transform:translateY(-2px)}
+.cobro b{font-weight:600}
+
+/* ondas + contacto */
+.ondas{position:relative;overflow:hidden;isolation:isolate;background:var(--cc-perla);color:var(--hoja-tinta);border-top:1px solid var(--linea)}
+.ondas canvas{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:-1}
+.ondas .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:2rem 3rem;align-items:start;padding-block:clamp(3rem,7vw,5rem) 11rem}
+.ondas-copy{display:grid;gap:1.2rem}
+.ondas-copy p{color:var(--hoja-suave);font-size:19px;line-height:1.5}
+.form{display:grid;gap:1.1rem;padding:1.8rem;background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta);box-shadow:var(--sombra-carta);min-width:0}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.campo{display:grid;gap:7px;min-width:0;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tinta-suave)}
+.campo input,.campo select,.campo textarea{font-family:var(--f);font-size:17px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--tinta);background:transparent;width:100%}
+.campo input,.campo select{border:0;border-bottom:2px solid var(--linea-fuerte);border-radius:0;padding:9px 0}
+.campo select option{background:var(--cara);color:var(--tinta)}
+.campo input:focus,.campo select:focus{outline:none;border-bottom-color:var(--tinta);background:var(--cc-tornasol) no-repeat left bottom/100% 4px}
+.campo textarea{font-size:16px;border:1.5px solid var(--linea-fuerte);border-radius:var(--radio-campo);padding:11px 13px;resize:vertical}
+.campo textarea:focus{outline:2px solid var(--foco);outline-offset:2px;border-color:var(--tinta)}
+.form .btn{justify-self:start}
+.status{font-size:14px;font-weight:500;min-height:1.3em;color:var(--tinta-suave)}
+.status[data-kind="err"]{color:var(--error)}
+.status[data-kind="ok"]{color:var(--tinta)}
+.pie .wrap{padding-block:1.4rem;display:flex;justify-content:space-between;gap:.5rem 1rem;flex-wrap:wrap;font-size:14px;font-weight:500;color:var(--tinta-suave)}
+
+/* menú fijo que se compacta al bajar */
+nav.menu{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--papel) 84%,transparent);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .3s ease,box-shadow .3s ease}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:21;background:var(--papel)}
+nav.menu .wrap{transition:padding .3s ease;flex-wrap:nowrap}
+nav.menu .brand .logo{transition:height .3s ease}
+nav.menu.compacta{border-bottom-color:var(--linea);box-shadow:0 12px 30px -26px rgba(120,90,160,.55)}
+nav.menu.compacta .wrap{padding-block:.45rem}
+nav.menu.compacta .brand .logo{height:46px}
+.navlinks a{position:relative;padding-block:4px}
+.navlinks a::after{content:"";position:absolute;left:0;right:0;bottom:-2px;height:3px;border-radius:3px;background:var(--cc-tornasol);transform:scaleX(0);transform-origin:left;transition:transform .35s ease}
+.navlinks a:hover::after,.navlinks a[aria-current="true"]::after{transform:scaleX(1)}
+.navlinks a[aria-current="true"]{color:var(--tinta)}
+.navlinks a.nav-cta{border:1.5px solid var(--tinta);border-radius:var(--radio-pildora);padding:7px 14px;color:var(--tinta)}
+.navlinks a.nav-cta::after{display:none}
+.navlinks a.nav-cta:hover{background:var(--tinta);color:var(--papel)}
+[id]{scroll-margin-top:96px}
+@media (max-width:640px){
+  .navlinks{display:flex}
+  .navlinks a:not(.nav-cta){display:none}
+  nav.menu.compacta .brand .logo{height:40px}
+}
+@media (prefers-reduced-motion:reduce){nav.menu,nav.menu .wrap,nav.menu .brand .logo,.navlinks a::after{transition:none}}
+
+@media (max-width:900px){
+  .losa,.cobro,.ondas .wrap{grid-template-columns:1fr}
+  .losa .cc-simbolo{width:180px;grid-row:1;justify-self:start}
+  .pilares{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .pilares,.row{grid-template-columns:1fr}
+  .item{grid-template-columns:minmax(0,1fr) 1.5rem}
+  .item-k,.item-main,.item .etq{grid-column:1}
+  .item .etq{justify-content:flex-start}
+  .item-f{grid-column:2;grid-row:1}
+}
+@media (prefers-reduced-motion:reduce){.promo,.promo-f{transition:none}.promo:hover,.promo:hover .promo-f{transform:none}.cc-halo,.cc-chispa,.cc-brilla .cc-idea{animation:none}.cc-halo{opacity:.45;transform:scale(1.2)}.btn,.item,.item-t,.item-f{transition:none}.btn:hover{transform:none}}
+</style>
+<style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
+<style>
+/* /brief: portada, cómo funciona, historia con autollenado, brief por secciones con índice, envío sobre Ondas */
+.portada .losa{grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr)}
+.datos-portada{display:flex;flex-wrap:wrap;gap:6px}
+.pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1.2rem;counter-reset:p}
+.pasos li{display:grid;gap:.6rem;align-content:start;padding:1.6rem;background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta)}
+.pasos li:nth-child(2){transform:rotate(.5deg)}.pasos li:nth-child(odd){transform:rotate(-.4deg)}
+.pasos .n{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--idea-texto)}
+.pasos p{font-size:15px;line-height:1.6;color:var(--tinta-suave)}
+.pasos .etq{margin-top:.2rem}
+/* historia */
+.historia{border-radius:24px;background:var(--cc-perla);border:1px solid var(--linea);padding:clamp(1.4rem,4vw,3rem);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:2rem 3rem;align-items:start}
+.historia-copy{display:grid;gap:1rem}
+.historia-copy p{color:var(--hoja-suave);font-size:18px;line-height:1.55}
+.historia-caja{display:grid;gap:.9rem;padding:1.4rem;background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta);box-shadow:var(--sombra-carta);min-width:0}
+.historia-caja textarea{font-family:var(--f);font-size:16px;line-height:1.55;color:var(--tinta);background:transparent;width:100%;min-height:13rem;border:1.5px solid var(--linea-fuerte);border-radius:var(--radio-campo);padding:12px 14px;resize:vertical}
+.historia-caja textarea:focus{outline:2px solid var(--foco);outline-offset:2px;border-color:var(--tinta)}
+.historia-pie{display:flex;flex-wrap:wrap;gap:.8rem 1rem;align-items:center;justify-content:space-between}
+.cuenta{font-size:13px;font-weight:500;color:var(--tinta-suave);font-variant-numeric:tabular-nums}
+.resultado{display:grid;gap:.7rem;padding:1.1rem 1.2rem;border-radius:var(--radio-opcion);background:var(--papel-2);border:1px solid var(--linea)}
+.resultado b{font-weight:800}
+.resultado ul{margin:0;padding-left:1.1rem;display:grid;gap:.3rem;font-size:15px}
+.resultado .k{font-size:11px}
+.resultado .btn{justify-self:start}
+/* brief */
+.brief{display:grid;grid-template-columns:15rem minmax(0,1fr);gap:2.5rem;align-items:start}
+.indice{position:sticky;top:6rem;display:grid;gap:1rem}
+.indice ol{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.indice a{display:grid;grid-template-columns:1.6rem 1fr auto;gap:8px;align-items:center;padding:8px 10px;border-radius:var(--radio-opcion);text-decoration:none;color:var(--tinta-suave);font-size:14px;font-weight:600;line-height:1.25;transition:background .2s,color .2s}
+.indice a:hover{background:var(--papel-2);color:var(--tinta)}
+.indice a[aria-current="true"]{background:var(--cara);color:var(--tinta);box-shadow:0 0 0 1px var(--linea)}
+.indice .in{font-size:11px;letter-spacing:.08em;color:var(--idea-texto)}
+.indice .ok{width:18px;height:18px;border-radius:50%;border:1.5px solid var(--linea-fuerte);display:grid;place-items:center;font-size:11px;color:transparent}
+.indice .ok.lleno{background:var(--cc-tornasol);border-color:transparent;color:var(--sobre-idea)}
+.avance{display:grid;gap:6px;font-size:13px;font-weight:500;color:var(--tinta-suave)}
+.barra{height:6px;border-radius:6px;background:var(--papel-2);overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--cc-tornasol);transition:width .4s ease}
+.guardado{font-size:12px;color:var(--tinta-suave)}
+.secciones{display:grid;gap:1.4rem;min-width:0}
+.sec{display:grid;gap:1.2rem;padding:clamp(1.2rem,3vw,2rem);background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta);scroll-margin-top:6rem;min-width:0}
+.sec-cab{display:grid;gap:.5rem}
+.sec-cab .n{font-size:12px;font-weight:600;letter-spacing:.12em;color:var(--idea-texto)}
+.sec-cab h3{font-size:clamp(1.3rem,1.1rem + .6vw,1.7rem);font-weight:800;letter-spacing:-.025em}
+.tip{font-size:15px;line-height:1.55;color:var(--tinta-suave);max-width:62ch}
+.campos{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem 1.4rem}
+.campos .ancho{grid-column:1/-1}
+.campo{position:relative}
+.campo .lab{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.req{color:var(--idea-texto);font-weight:800}
+.sug{display:none;font-size:10px;font-weight:800;letter-spacing:.1em;padding:3px 8px;border-radius:var(--radio-pildora);background:var(--cc-tornasol);color:var(--sobre-idea)}
+.campo.es-sugerido .sug,fieldset.es-sugerido .sug{display:inline-block}
+.campo.es-sugerido input,.campo.es-sugerido select{background:linear-gradient(90deg,color-mix(in srgb,var(--tornasol-lila) 14%,transparent),transparent 70%)}
+.campo.es-sugerido textarea{border-color:var(--tornasol-lila);background:linear-gradient(135deg,color-mix(in srgb,var(--tornasol-lila) 10%,transparent),transparent 60%)}
+.ayuda{font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--tinta-suave);line-height:1.45}
+.error-campo{font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--error)}
+.campo [aria-invalid="true"]{border-color:var(--error)!important}
+fieldset.campo{border:0;margin:0;padding:0;min-width:0}
+fieldset.campo legend{padding:0;margin-bottom:9px;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;width:1px;height:1px}
+.chip span{display:inline-block;font-size:14px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--tinta);padding:8px 14px;border-radius:var(--radio-pildora);border:1.5px solid var(--linea-fuerte);background:var(--cara);cursor:pointer;transition:background .2s,border-color .2s,box-shadow .2s}
+.chip input:checked + span{background:var(--cc-tornasol);border-color:transparent;box-shadow:var(--sombra-elegida);color:var(--sobre-idea)}
+.chip input:focus-visible + span{outline:2px solid var(--foco);outline-offset:2px}
+/* envío */
+.envio{display:grid;gap:1.1rem;padding:1.8rem;background:var(--cara);border:1px solid var(--linea);border-radius:var(--radio-carta);box-shadow:var(--sombra-carta);min-width:0}
+.envio .acciones{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.enlace{font-family:var(--f);font-size:14px;font-weight:600;color:var(--tinta-suave);background:none;border:0;padding:4px 0;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.enlace:hover{color:var(--tinta)}
+.status ul{margin:.4rem 0 0;padding-left:1.1rem}
+.status a{font-weight:600}
+.avance-movil{display:none}
+@media (max-width:900px){
+  .brief{grid-template-columns:1fr}
+  .indice{display:none}
+  .avance-movil{display:grid;position:sticky;top:calc(env(safe-area-inset-top,0px) + 64px);z-index:10;gap:6px;padding:10px 14px;margin-bottom:-.4rem;background:color-mix(in srgb,var(--papel) 90%,transparent);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid var(--linea);border-radius:var(--radio-opcion);font-size:13px;font-weight:500;color:var(--tinta-suave)}
+  .historia{grid-template-columns:1fr}
+  .pasos{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .campos{grid-template-columns:1fr}
+  .portada .losa{grid-template-columns:1fr}
+  .portada .losa .cc-simbolo{display:none}
+  .navlinks .ocultar-movil{display:none}
+  .navlinks{gap:1rem}
+}
+@media (prefers-reduced-motion:reduce){.barra i,.chip span{transition:none}.pasos li{transform:none}}
+</style>
+</head>
+<body>
+<nav class="menu" aria-label="Principal"><div class="wrap">
+  <a class="brand" href="/" aria-label="Consejo de Creativos, ir al sitio"><svg class="logo" focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 896.58 331.04" aria-hidden="true"><defs><clipPath id="cc-clip-0"><path clip-rule="nonzero" d="M 1.085938 82 L 55 82 L 55 137 L 1.085938 137 Z M 1.085938 82 "/></clipPath><clipPath id="cc-clip-1"><path clip-rule="nonzero" d="M 125 278 L 178 278 L 178 330.082031 L 125 330.082031 Z M 125 278 "/></clipPath><clipPath id="cc-clip-2"><path clip-rule="nonzero" d="M 854 221 L 895.074219 221 L 895.074219 278 L 854 278 Z M 854 221 "/></clipPath></defs><path fill-rule="nonzero" fill="#E59E1E" fill-opacity="1" d="M 190.179688 168.390625 C 190.179688 189.570312 173.011719 206.742188 151.828125 206.742188 C 130.648438 206.742188 113.476562 189.570312 113.476562 168.390625 C 113.476562 147.207031 130.648438 130.035156 151.828125 130.035156 C 173.011719 130.035156 190.179688 147.207031 190.179688 168.390625 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 188.277344 86.898438 C 186.277344 90.800781 181.132812 91.988281 177.09375 91.527344 C 160.101562 89.589844 143.652344 89.675781 126.742188 91.535156 C 120.652344 92.207031 116.558594 88.792969 114 83.789062 L 101.660156 59.632812 C 96.535156 49.597656 108.777344 43.546875 120.078125 40.320312 C 124.628906 53.742188 136.21875 62.003906 150.269531 62.640625 C 165.453125 63.328125 178.753906 54.996094 184.15625 40.394531 C 189.445312 41.96875 194.320312 43.902344 198.960938 47 C 202.804688 49.566406 204.652344 54.925781 202.425781 59.269531 L 188.277344 86.898438 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 179.566406 26.851562 C 179.566406 41.679688 167.546875 53.699219 152.71875 53.699219 C 137.890625 53.699219 125.867188 41.679688 125.867188 26.851562 C 125.867188 12.023438 137.890625 0.00390625 152.71875 0.00390625 C 167.546875 0.00390625 179.566406 12.023438 179.566406 26.851562 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 32.859375 164.445312 C 23.457031 164.148438 23.378906 153.6875 25.683594 143.5 C 39.671875 144.667969 51.929688 137.128906 58.066406 124.71875 C 64.527344 111.652344 62.464844 95.882812 51.546875 85.992188 C 54.929688 81.339844 58.242188 77.324219 62.363281 73.710938 C 66.265625 70.289062 71.871094 70.660156 75.160156 74.683594 L 94.941406 96.378906 C 98.710938 100.511719 98.984375 105.921875 96.066406 110.695312 C 86.921875 125.675781 79.425781 141.222656 73.050781 157.585938 C 70.980469 162.898438 66.4375 165.5 60.855469 165.324219 L 32.859375 164.445312 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 63.777344 261.203125 C 66.839844 257.660156 68.578125 254.40625 69.597656 250.195312 C 74.007812 231.96875 62.703125 213.714844 44.285156 209.867188 C 39.804688 208.929688 35.753906 209.210938 31.097656 210.691406 L 28.019531 195.796875 C 27.089844 191.316406 30.417969 187.105469 34.976562 186.421875 L 63.246094 182.183594 C 68.78125 181.355469 73.195312 185.261719 75.484375 190.023438 C 82.597656 204.816406 91.039062 218.199219 100.972656 231.167969 C 104.09375 235.246094 104.714844 240.796875 101.632812 244.867188 L 84.089844 268.046875 C 79.558594 274.03125 70.269531 268.53125 63.777344 261.203125 "/><g clip-path="url(#cc-clip-0)"><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 54.351562 109.570312 C 54.351562 124.277344 42.429688 136.203125 27.71875 136.203125 C 13.011719 136.203125 1.085938 124.277344 1.085938 109.570312 C 1.085938 94.859375 13.011719 82.9375 27.71875 82.9375 C 42.429688 82.9375 54.351562 94.859375 54.351562 109.570312 "/></g><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 63.425781 242.515625 C 63.425781 256.878906 51.785156 268.523438 37.421875 268.523438 C 23.058594 268.523438 11.414062 256.878906 11.414062 242.515625 C 11.414062 228.15625 23.058594 216.511719 37.421875 216.511719 C 51.785156 216.511719 63.425781 228.15625 63.425781 242.515625 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 271.445312 164.277344 L 242.433594 165.285156 C 236.457031 165.492188 231.996094 162.148438 229.96875 156.699219 C 223.8125 140.164062 216.242188 124.734375 207.152344 109.664062 C 204.640625 105.5 205.285156 100.308594 208.429688 96.796875 L 228.777344 74.050781 C 232.355469 70.054688 238.332031 70.429688 241.660156 74.269531 L 251.84375 86.027344 C 243.308594 93.375 240.21875 103.847656 241.863281 114.730469 C 244.5 132.207031 259.398438 144.957031 277.667969 143.433594 C 280.007812 152.792969 279.703125 163.992188 271.445312 164.277344 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 232.542969 244.9375 C 232.992188 251.40625 235.210938 256.40625 239.09375 261.070312 C 236.234375 264.5 232.925781 267.5625 228.996094 269.546875 C 225.007812 271.5625 220.867188 270.328125 218.324219 266.953125 L 202.214844 245.578125 C 199.390625 241.824219 198.644531 236.5625 201.664062 232.40625 C 211.695312 218.597656 220.445312 204.386719 228.203125 189.113281 C 230.605469 184.386719 235.246094 181.410156 240.546875 182.203125 L 268.03125 186.320312 C 272.722656 186.984375 275.898438 191.210938 274.894531 195.824219 L 271.703125 210.503906 C 267.105469 209.125 263.195312 208.820312 258.671875 209.832031 C 242.664062 213.40625 231.367188 228.027344 232.542969 244.9375 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 301.933594 109.601562 C 301.933594 124.320312 290.003906 136.25 275.285156 136.25 C 260.566406 136.25 248.636719 124.320312 248.636719 109.601562 C 248.636719 94.886719 260.566406 82.957031 275.285156 82.957031 C 290.003906 82.957031 301.933594 94.886719 301.933594 109.601562 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 291.300781 242.503906 C 291.300781 256.867188 279.660156 268.511719 265.296875 268.511719 C 250.933594 268.511719 239.289062 256.867188 239.289062 242.503906 C 239.289062 228.140625 250.933594 216.496094 265.296875 216.496094 C 279.660156 216.496094 291.300781 228.140625 291.300781 242.503906 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 181.863281 294.703125 C 177.921875 278.734375 162.65625 269.351562 146.664062 271.996094 C 134.441406 274.019531 124.824219 282.171875 121.632812 294.664062 C 116.660156 293.875 112.023438 292.230469 107.742188 289.558594 C 104.339844 287.433594 103.359375 282.765625 104.980469 279.085938 L 116.148438 253.707031 C 118.488281 248.382812 123.058594 244.960938 129.140625 245.386719 C 144.722656 246.476562 159.886719 246.296875 175.496094 245.410156 C 180.660156 245.113281 185.1875 247.894531 187.160156 252.53125 L 198.511719 279.234375 C 200.359375 283.585938 198.203125 288.179688 194.4375 290.367188 C 190.601562 292.335938 187.328125 293.566406 181.863281 294.703125 "/><g clip-path="url(#cc-clip-1)"><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 177.574219 304.25 C 177.574219 318.515625 166.007812 330.082031 151.742188 330.082031 C 137.472656 330.082031 125.90625 318.515625 125.90625 304.25 C 125.90625 289.980469 137.472656 278.414062 151.742188 278.414062 C 166.007812 278.414062 177.574219 289.980469 177.574219 304.25 "/></g><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 371.433594 133.027344 C 377.394531 147.941406 394.609375 153.320312 407.984375 145.785156 C 413.085938 142.539062 416.539062 138.222656 418.390625 132.066406 L 446.421875 132.109375 C 441.289062 165.410156 409.589844 181.203125 377.152344 172.355469 C 343.421875 163.15625 330.761719 125.140625 343.6875 93.609375 C 353.714844 69.140625 378.308594 55.710938 404.445312 58.78125 C 416.824219 60.234375 428.011719 64.851562 436.132812 74.421875 C 442.761719 82.53125 446.15625 92.324219 446.753906 103.324219 L 418.875 104.664062 C 417.167969 94.09375 409.207031 86.652344 398.621094 85.882812 C 388.054688 84.550781 378.453125 89.546875 373.324219 98.980469 C 367.742188 109.25 366.878906 121.632812 371.433594 133.027344 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 573.664062 117.351562 C 568.820312 118.988281 565.464844 123.890625 565.4375 129.074219 L 565.222656 172.269531 L 539.171875 172.28125 L 539.246094 95.082031 L 564.328125 95.132812 L 564.8125 105.71875 C 569.570312 97.46875 578.046875 93.378906 587.5 93.179688 C 605.195312 92.804688 615.25 104.808594 615.898438 122.519531 L 615.902344 172.277344 L 589.492188 172.316406 L 589.414062 128.230469 C 589.40625 124.214844 587.507812 120.652344 584.941406 118.832031 C 581.679688 116.515625 577.96875 115.902344 573.664062 117.351562 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 688.042969 157.140625 C 682.367188 174.507812 655.957031 177.496094 638.546875 171.742188 C 628.191406 168.324219 621.15625 159.40625 620.859375 148.640625 L 644.445312 148.636719 L 646.542969 153.121094 C 650.488281 157.234375 657.230469 157.597656 662.011719 154.722656 C 663.996094 153.53125 664.597656 151.144531 664.097656 149.117188 C 663.710938 147.53125 661.996094 145.875 659.808594 145.410156 L 639.640625 141.136719 C 633.65625 139.867188 628.019531 137.027344 624.53125 131.859375 C 620.183594 125.417969 619.796875 117.550781 622.777344 109.722656 C 629.019531 93.308594 653.539062 89.972656 670.570312 95.558594 C 681.117188 99.015625 688.148438 108.234375 688.039062 119.328125 L 664.546875 119.328125 C 664.09375 116.152344 662.628906 113.554688 659.480469 112.375 C 656.011719 111.074219 652.085938 111.109375 648.832031 112.96875 C 646.96875 114.03125 646.136719 116.082031 646.300781 117.953125 C 646.464844 119.828125 648.191406 121.859375 650.515625 122.3125 L 670.195312 126.164062 C 675.601562 127.222656 680.867188 129.542969 684.578125 133.835938 C 689.953125 140.046875 690.828125 148.621094 688.042969 157.140625 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 800.664062 188.234375 C 795.523438 204.320312 779.691406 206.058594 763.355469 203.652344 L 763.4375 182.085938 C 766.527344 182.953125 769.710938 183.429688 772.699219 182.324219 C 775.925781 181.128906 776.914062 177.972656 777.40625 174.511719 L 777.503906 95.136719 L 803.226562 95.101562 L 803.246094 168.847656 C 803.457031 175.671875 802.667969 181.957031 800.664062 188.234375 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 804.832031 73.726562 C 804.832031 81.601562 798.449219 87.988281 790.570312 87.988281 C 782.695312 87.988281 776.308594 81.601562 776.308594 73.726562 C 776.308594 65.851562 782.695312 59.464844 790.570312 59.464844 C 798.449219 59.464844 804.832031 65.851562 804.832031 73.726562 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 502.710938 145.605469 C 499.789062 149.925781 495.03125 151.628906 490.445312 151.398438 C 485.800781 151.171875 481.3125 148.5 478.839844 144.011719 C 475.039062 137.140625 475.230469 128.644531 479.566406 122.085938 C 482.507812 117.628906 487.414062 115.304688 492.570312 115.773438 C 497.464844 116.222656 502.042969 119.324219 504.34375 124.359375 C 507.417969 131.121094 507.128906 139.085938 502.710938 145.605469 Z M 520.011719 102.890625 C 509.242188 93.6875 494.792969 91.433594 481.101562 94.214844 C 461.519531 98.195312 448.707031 114.835938 449.316406 134.738281 C 449.714844 147.609375 455.117188 159.507812 465.835938 166.816406 C 475.570312 173.445312 486.964844 175.398438 499.121094 173.707031 C 517.757812 171.101562 530.9375 157.09375 532.960938 138.765625 C 534.449219 125.316406 530.398438 111.773438 520.011719 102.890625 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 862.707031 145.675781 C 859.59375 150.144531 854.46875 151.859375 849.851562 151.339844 C 845.097656 150.820312 840.789062 148.078125 838.535156 143.402344 C 835.335938 136.800781 835.503906 129.007812 839.234375 122.652344 C 841.886719 118.125 846.800781 115.703125 851.707031 115.714844 C 856.84375 115.714844 861.53125 118.65625 864.101562 123.632812 C 867.652344 130.492188 867.363281 138.984375 862.707031 145.675781 Z M 882.398438 105.34375 C 873.484375 95.730469 860.839844 92.542969 848.148438 93.207031 C 824.417969 94.457031 807.597656 113.671875 809.480469 137.230469 C 810.738281 152.9375 819.710938 166.21875 834.898438 171.5625 C 851.769531 177.515625 873.554688 173.945312 884.523438 159.65625 C 896.816406 143.644531 896.25 120.28125 882.398438 105.34375 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 718.5625 125.085938 C 719.671875 118.027344 724.9375 113.222656 731.347656 112.992188 C 738.1875 112.753906 744.558594 116.59375 745.484375 124.925781 Z M 765.167969 109.28125 C 751.949219 88.742188 716.988281 87.117188 700.675781 107.828125 C 693.335938 117.140625 691.082031 128.675781 692.460938 140.402344 C 694.464844 157.550781 706.808594 170.664062 723.820312 173.488281 C 745.585938 177.117188 766.464844 167.492188 770.273438 145.386719 L 744.828125 145.4375 C 743.351562 150.042969 740.339844 152.417969 736.472656 153.445312 C 731.675781 154.402344 726.941406 153.414062 723.269531 150.152344 C 720.398438 147.621094 718.453125 143.3125 718.464844 139.015625 L 771.351562 138.957031 C 772.167969 128.277344 770.851562 118.097656 765.167969 109.28125 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 385.609375 250.371094 C 385.28125 258.789062 380.5625 266.1875 373.542969 269.21875 C 365.566406 272.667969 355.984375 271.382812 350.203125 264.0625 C 343.472656 255.527344 343.960938 242.996094 350.421875 234.808594 C 356.085938 227.617188 365.488281 226.332031 373.484375 229.492188 C 381.570312 232.675781 385.96875 241.257812 385.609375 250.371094 Z M 392.539062 198.664062 C 390.207031 198.085938 388.113281 198.203125 385.570312 198.464844 L 385.460938 232.785156 C 376.84375 219.839844 360.441406 218.375 348.976562 226.800781 C 341.808594 232.078125 338.367188 240.871094 338.417969 250.292969 C 338.507812 266.515625 350.542969 278.691406 366.984375 277.34375 C 374.839844 276.707031 381.511719 272.539062 385.132812 265.6875 L 385.519531 276.207031 L 392.550781 275.980469 L 392.539062 198.664062 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 408.214844 245.71875 C 409.371094 237.371094 414.695312 230.949219 422.292969 228.515625 C 433.917969 225.285156 445.636719 232.277344 446.8125 245.539062 Z M 439.542969 224.148438 C 430.449219 219.8125 419.78125 220.96875 411.765625 226.921875 C 404.523438 232.285156 400.644531 241.457031 401.113281 251.101562 C 401.902344 267.464844 414.945312 279.050781 431.257812 277.265625 C 440.800781 276.21875 448.917969 270.875 452.835938 261.511719 L 445.128906 260.992188 C 440.859375 269.398438 431.496094 272.769531 422.375 270.304688 C 414.417969 268.171875 408.34375 260.246094 408.285156 251.441406 L 453.992188 251.429688 C 454.988281 239.984375 449.734375 229.003906 439.542969 224.148438 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 494.78125 257.207031 C 500.230469 266.597656 510.378906 270.96875 520.710938 271.03125 C 533.207031 271.109375 543.664062 263.976562 548.089844 252.332031 L 555.996094 252.859375 C 550.925781 269.371094 536.144531 278.722656 519.078125 278.148438 C 502.871094 277.609375 489.09375 268.253906 484.441406 252.402344 C 481.601562 242.71875 481.507812 232.289062 484.972656 222.707031 C 492.507812 201.878906 513.050781 192.847656 533.898438 198.855469 C 545.53125 202.207031 553.855469 211.292969 556.375 223.015625 L 548.65625 224.210938 C 546.269531 213.835938 538.367188 206.691406 528.074219 204.636719 C 512.980469 201.628906 498.128906 209.335938 492.574219 223.8125 C 488.425781 234.613281 488.738281 246.792969 494.78125 257.207031 "/><g clip-path="url(#cc-clip-2)"><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 894.464844 266.058594 C 891.867188 276.378906 878.175781 279.566406 866.882812 276.300781 C 860.914062 274.578125 856.269531 270.296875 854.449219 264.28125 C 856.617188 263.128906 858.597656 262.804688 861.152344 262.628906 C 864.117188 271.648438 876.925781 273.757812 884.132812 269.355469 C 887.257812 267.441406 888.6875 264.191406 888.132812 260.582031 C 887.695312 257.75 885.195312 254.953125 881.664062 254.167969 L 865.125 250.480469 C 859.070312 249.132812 855.480469 244.289062 855.292969 238.136719 C 855.113281 232.265625 857.578125 227.21875 862.847656 224.300781 C 873.40625 218.449219 889.5625 221.546875 893.167969 233.980469 C 890.757812 235.0625 888.800781 235.363281 886.449219 235.570312 C 884.214844 227.230469 872.363281 225.5625 865.867188 229.792969 C 863.089844 231.605469 862.03125 234.664062 862.214844 237.347656 C 862.445312 240.757812 864.675781 243.40625 868.164062 244.164062 L 878.828125 246.472656 C 883.339844 247.449219 887.984375 248.574219 891.363281 251.863281 C 895.117188 255.519531 895.757812 260.921875 894.464844 266.058594 "/></g><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 790.25 222.949219 C 792.839844 222.082031 795.050781 222.390625 797.867188 222.804688 L 776.308594 276.179688 L 766.726562 276.136719 L 745.570312 222.734375 L 753.035156 222.585938 L 771.644531 270.226562 L 790.25 222.949219 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 727.632812 269.605469 C 728.535156 271.613281 728.140625 273.789062 728.058594 276.214844 C 723.324219 277.132812 718.410156 277.417969 713.808594 275.351562 C 709.339844 273.34375 706.179688 268.582031 706.136719 263.53125 L 705.820312 228.5625 L 697.421875 228.457031 L 697.542969 222.601562 L 705.835938 222.457031 L 705.933594 205.078125 L 712.859375 204.914062 L 712.847656 222.457031 L 728.007812 222.609375 L 727.902344 228.644531 L 712.796875 228.605469 L 712.933594 260.894531 C 712.949219 264.023438 714.070312 266.945312 716.367188 268.820312 C 719.707031 270.488281 722.769531 270.914062 727.632812 269.605469 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 571.058594 276.015625 L 564.066406 276.148438 L 564.007812 222.734375 C 566.445312 222.207031 568.65625 222.292969 571.089844 222.671875 L 571.453125 232.003906 C 575.609375 223.808594 584.652344 220.246094 593.578125 222.171875 C 593.953125 224.828125 594.023438 227.160156 593.578125 229.480469 C 587.585938 228.234375 582.222656 228.726562 577.492188 232.292969 C 573.941406 234.964844 571.269531 239.933594 571.234375 245.515625 L 571.058594 276.015625 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 734.015625 222.457031 L 741.15625 222.46875 L 741.066406 276.324219 L 733.925781 276.3125 L 734.015625 222.457031 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 742.46875 207.933594 C 742.46875 210.667969 740.253906 212.882812 737.519531 212.882812 C 734.785156 212.882812 732.570312 210.667969 732.570312 207.933594 C 732.570312 205.199219 734.785156 202.984375 737.519531 202.984375 C 740.253906 202.984375 742.46875 205.199219 742.46875 207.933594 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 600.617188 245.695312 C 601.742188 235.445312 609.820312 228.21875 619.0625 227.789062 C 629.132812 227.332031 637.929688 234.0625 639.132812 245.515625 Z M 637.039062 227.578125 C 628.523438 220.179688 616.3125 219.703125 606.429688 225.296875 C 597.496094 230.359375 592.910156 240.570312 593.546875 251.480469 C 594.503906 267.683594 607.875 279.339844 624.179688 277.164062 C 633.472656 275.917969 641.140625 270.664062 644.90625 261.433594 L 637.308594 260.941406 C 632.8125 269.347656 623.839844 272.769531 614.695312 270.246094 C 606.707031 268.03125 601.003906 260.273438 600.585938 251.460938 L 646.175781 251.410156 C 646.960938 242.175781 643.910156 233.53125 637.039062 227.578125 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 682.199219 266.347656 C 673.40625 274.09375 660.015625 271.699219 658.019531 264.878906 C 656.960938 261.25 657.679688 257.402344 660.621094 255.089844 C 663.085938 253.144531 666.105469 251.890625 669.226562 251.558594 L 687.523438 249.636719 C 688.261719 255.96875 686.9375 262.179688 682.199219 266.347656 Z M 694.273438 238.964844 C 694.246094 231.417969 689.410156 225.347656 682.4375 222.972656 C 670.335938 218.835938 655.238281 223.5 652.59375 236.316406 C 654.949219 237.140625 656.742188 237.449219 659.257812 237.460938 C 660.710938 230.800781 666.503906 227.738281 673.015625 227.667969 C 677.5625 227.617188 681.851562 228.894531 684.542969 231.976562 C 687.375 235.21875 688.023438 239.882812 687.074219 244.082031 C 678.242188 244.980469 669.90625 244.828125 661.828125 247.28125 C 654.210938 249.597656 649.714844 256.257812 650.351562 263.695312 C 650.988281 271.0625 657.011719 276.359375 665.269531 277.253906 C 674.820312 278.292969 683.117188 274.53125 687.515625 266.257812 L 687.644531 276.140625 L 694.464844 276.199219 L 694.273438 238.964844 "/><path fill-rule="nonzero" fill="currentColor" fill-opacity="1" d="M 823.96875 270.644531 C 812.242188 270.644531 802.738281 261.140625 802.738281 249.414062 C 802.738281 237.691406 812.242188 228.1875 823.96875 228.1875 C 835.695312 228.1875 845.207031 237.691406 845.207031 249.414062 C 845.207031 261.140625 835.695312 270.644531 823.96875 270.644531 Z M 824.019531 221.457031 C 808.542969 221.457031 796.007812 233.992188 796.007812 249.457031 C 796.007812 264.929688 808.542969 277.464844 824.019531 277.464844 C 839.484375 277.464844 852.015625 264.929688 852.015625 249.457031 C 852.015625 233.992188 839.484375 221.457031 824.019531 221.457031 "/></svg></a>
+  <div class="navlinks"><a class="ocultar-movil" href="#como">Cómo funciona</a><a class="ocultar-movil" href="#historia">Cuéntanoslo</a><a href="#brief">El brief</a><a class="ocultar-movil" href="#enviar">Enviar</a><a href="/">Sitio</a></div>
+</div></nav>
+
+<header class="portada" id="inicio"><div class="wrap">
+  <div class="losa">
+    <div class="losa-copy">
+      <span class="k">Brief de cliente</span>
+      <h1>Cuéntanos tu proyecto <em>antes</em> de cotizarlo.</h1>
+      <p class="entrada">Un buen brief ahorra semanas. Llénalo a tu ritmo o cuéntanoslo con tus palabras y lo llenamos por ti.</p>
+      <div class="ctas"><a class="btn principal" href="#historia">Contarlo con mis palabras</a><a class="btn secundario" href="#brief">Llenar el brief</a></div>
+      <ul class="etq datos-portada"><li>9 secciones</li><li>6 datos obligatorios</li><li>Se guarda en tu navegador</li></ul>
+    </div>
+    <svg class="cc-simbolo cc-brilla" viewBox="0 0 302 331" aria-hidden="true"><circle class="cc-halo" cx="151.4" cy="168.7" r="70"/><path class="cc-asiento on" d="M 188.27 86.89 C 186.27 90.80 181.13 91.98 177.09 91.52 C 160.10 89.58 143.65 89.67 126.74 91.53 C 120.65 92.20 116.55 88.79 114 83.78 L 101.66 59.63 C 96.53 49.59 108.77 43.54 120.07 40.32 C 124.62 53.74 136.21 62.00 150.26 62.64 C 165.45 63.32 178.75 54.99 184.15 40.39 C 189.44 41.96 194.32 43.90 198.96 47 C 202.80 49.56 204.65 54.92 202.42 59.26 L 188.27 86.89 M 179.56 26.85 C 179.56 41.67 167.54 53.69 152.71 53.69 C 137.89 53.69 125.86 41.67 125.86 26.85 C 125.86 12.02 137.89 0.00 152.71 0.00 C 167.54 0.00 179.56 12.02 179.56 26.85"/><path class="cc-asiento on" d="M 271.44 164.27 L 242.43 165.28 C 236.45 165.49 231.99 162.14 229.96 156.69 C 223.81 140.16 216.24 124.73 207.15 109.66 C 204.64 105.5 205.28 100.30 208.42 96.79 L 228.77 74.05 C 232.35 70.05 238.33 70.42 241.66 74.26 L 251.84 86.02 C 243.30 93.37 240.21 103.84 241.86 114.73 C 244.5 132.20 259.39 144.95 277.66 143.43 C 280.00 152.79 279.70 163.99 271.44 164.27 M 301.93 109.60 C 301.93 124.32 290.00 136.25 275.28 136.25 C 260.56 136.25 248.63 124.32 248.63 109.60 C 248.63 94.88 260.56 82.95 275.28 82.95 C 290.00 82.95 301.93 94.88 301.93 109.60"/><path class="cc-asiento on" d="M 232.54 244.93 C 232.99 251.40 235.21 256.40 239.09 261.07 C 236.23 264.5 232.92 267.56 228.99 269.54 C 225.00 271.56 220.86 270.32 218.32 266.95 L 202.21 245.57 C 199.39 241.82 198.64 236.56 201.66 232.40 C 211.69 218.59 220.44 204.38 228.20 189.11 C 230.60 184.38 235.24 181.41 240.54 182.20 L 268.03 186.32 C 272.72 186.98 275.89 191.21 274.89 195.82 L 271.70 210.50 C 267.10 209.12 263.19 208.82 258.67 209.83 C 242.66 213.40 231.36 228.02 232.54 244.93 M 291.30 242.50 C 291.30 256.86 279.66 268.51 265.29 268.51 C 250.93 268.51 239.28 256.86 239.28 242.50 C 239.28 228.14 250.93 216.49 265.29 216.49 C 279.66 216.49 291.30 228.14 291.30 242.50"/><path class="cc-asiento on" d="M 181.86 294.70 C 177.92 278.73 162.65 269.35 146.66 271.99 C 134.44 274.01 124.82 282.17 121.63 294.66 C 116.66 293.87 112.02 292.23 107.74 289.55 C 104.33 287.43 103.35 282.76 104.98 279.08 L 116.14 253.70 C 118.48 248.38 123.05 244.96 129.14 245.38 C 144.72 246.47 159.88 246.29 175.49 245.41 C 180.66 245.11 185.18 247.89 187.16 252.53 L 198.51 279.23 C 200.35 283.58 198.20 288.17 194.43 290.36 C 190.60 292.33 187.32 293.56 181.86 294.70 M 177.57 304.25 C 177.57 318.51 166.00 330.08 151.74 330.08 C 137.47 330.08 125.90 318.51 125.90 304.25 C 125.90 289.98 137.47 278.41 151.74 278.41 C 166.00 278.41 177.57 289.98 177.57 304.25"/><path class="cc-asiento on" d="M 63.77 261.20 C 66.83 257.66 68.57 254.40 69.59 250.19 C 74.00 231.96 62.70 213.71 44.28 209.86 C 39.80 208.92 35.75 209.21 31.09 210.69 L 28.01 195.79 C 27.08 191.31 30.41 187.10 34.97 186.42 L 63.24 182.18 C 68.78 181.35 73.19 185.26 75.48 190.02 C 82.59 204.81 91.03 218.19 100.97 231.16 C 104.09 235.24 104.71 240.79 101.63 244.86 L 84.08 268.04 C 79.55 274.03 70.26 268.53 63.77 261.20 M 63.42 242.51 C 63.42 256.87 51.78 268.52 37.42 268.52 C 23.05 268.52 11.41 256.87 11.41 242.51 C 11.41 228.15 23.05 216.51 37.42 216.51 C 51.78 216.51 63.42 228.15 63.42 242.51"/><path class="cc-asiento on" d="M 32.85 164.44 C 23.45 164.14 23.37 153.68 25.68 143.5 C 39.67 144.66 51.92 137.12 58.06 124.71 C 64.52 111.65 62.46 95.88 51.54 85.99 C 54.92 81.33 58.24 77.32 62.36 73.71 C 66.26 70.28 71.87 70.66 75.16 74.68 L 94.94 96.37 C 98.71 100.51 98.98 105.92 96.06 110.69 C 86.92 125.67 79.42 141.22 73.05 157.58 C 70.98 162.89 66.43 165.5 60.85 165.32 L 32.85 164.44 M 54.35 109.57 C 54.35 124.27 42.42 136.20 27.71 136.20 C 13.01 136.20 1.08 124.27 1.08 109.57 C 1.08 94.85 13.01 82.93 27.71 82.93 C 42.42 82.93 54.35 94.85 54.35 109.57"/><path class="cc-idea on" d="M 190.17 168.39 C 190.17 189.57 173.01 206.74 151.82 206.74 C 130.64 206.74 113.47 189.57 113.47 168.39 C 113.47 147.20 130.64 130.03 151.82 130.03 C 173.01 130.03 190.17 147.20 190.17 168.39"/><circle class="cc-chispa" cx="140" cy="156" r="9"/></svg>
+  </div>
+</div></header>
+
+<section class="s" id="como"><div class="wrap">
+  <div class="cab">
+    <span class="k">Cómo funciona</span>
+    <h2>Del brief a la cotización, <em>por escrito</em>.</h2>
+  </div>
+  <ol class="pasos">
+    <li><span class="n">01</span><h3>Nos cuentas</h3><p>Llenas lo que sepas. Lo que no tengas a la mano lo vemos juntos; solo pedimos lo básico para arrancar.</p></li>
+    <li><span class="n">02</span><h3>Lo cuestionamos</h3><p>Cuentas revisa tiempos y presupuesto para que el proyecto sea viable. Planning busca la causa de fondo, porque el primer problema casi siempre es un síntoma.</p><ul class="etq"><li>Descubrir</li><li>Cuestionar</li><li>Pensar</li></ul></li>
+    <li><span class="n">03</span><h3>Lo firmamos juntos</h3><p>Te devolvemos el brief afinado y la cotización por escrito. Cuando los dos estamos de acuerdo, arrancamos.</p></li>
+  </ol>
+</div></section>
+
+<section class="s" id="historia"><div class="wrap">
+  <div class="historia">
+    <div class="historia-copy">
+      <span class="k">Atajo</span>
+      <h2>¿Prefieres contárnoslo con tus palabras?</h2>
+      <p>Escribe o pega lo que tengas: un correo, las notas de una junta o un brief viejo. Pasamos la historia a los campos del brief y marcamos cada uno como <b>Sugerido</b> para que lo revises.</p>
+      <p>No inventamos nada: lo que no digas se queda vacío, y no tocamos lo que ya escribiste.</p>
+    </div>
+    <div class="historia-caja">
+      <label class="campo" for="h-texto">Tu proyecto, como nos lo contarías en un café
+        <textarea id="h-texto" maxlength="8000" placeholder="Ej. Somos una marca de café de especialidad en Guadalajara. Desde que llegó una cadena con precios más bajos, nuestras ventas en tienda bajaron 15%. Queremos lanzar una campaña en marzo para recuperar a los clientes de 25 a 40 años…"></textarea>
+      </label>
+      <div class="historia-pie">
+        <span class="cuenta" id="h-cuenta">0 / 8,000</span>
+        <button class="btn principal" type="button" id="h-llenar">Llenar el brief por mí</button>
+      </div>
+      <p class="status" id="h-status" role="status" aria-live="polite"></p>
+      <div class="resultado" id="h-resultado" hidden></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="s" id="brief"><div class="wrap">
+  <div class="cab">
+    <span class="k">El brief</span>
+    <h2>Lo que necesitamos saber para cotizar bien.</h2>
+    <p>Los campos con <span class="req">*</span> son obligatorios. Todo lo demás suma, pero si no lo tienes, déjalo vacío.</p>
+  </div>
+  <div class="avance-movil" aria-hidden="true"><span id="am-texto">Obligatorios: 0 de 6</span><div class="barra"><i id="am-barra"></i></div></div>
+  <div class="brief">
+    <aside class="indice" aria-label="Secciones del brief">
+      <div class="avance"><span id="av-texto">Obligatorios: 0 de 6</span><div class="barra"><i id="av-barra"></i></div><span class="guardado" id="guardado">Tu avance se guarda en este navegador.</span></div>
+      <ol id="indice"></ol>
+    </aside>
+    <form class="secciones" id="brief-form" novalidate></form>
+  </div>
+</div></section>
+
+<section class="ondas" id="enviar"><canvas id="ondas" aria-hidden="true"></canvas><div class="wrap">
+  <div class="ondas-copy">
+    <span class="k">Enviar</span>
+    <h2>Revisa y <em>mándanos</em> tu brief.</h2>
+    <p>Lo lee el equipo de Cuentas y Planning del Consejo. Te escribimos para afinarlo contigo y mandarte la cotización.</p>
+  </div>
+  <div class="envio">
+    <p class="ayuda" id="e-resumen">Revisa los campos marcados como Sugerido antes de enviar.</p>
+    <div class="acciones">
+      <button class="btn principal" type="button" id="e-enviar">Enviar brief</button>
+      <button class="btn secundario" type="button" id="e-copiar">Copiar como texto</button>
+    </div>
+    <p class="status" id="e-status" role="status" aria-live="polite"></p>
+    <button class="enlace" type="button" id="e-borrar">Borrar todo y empezar de nuevo</button>
+  </div>
+</div></section>
+<footer class="pie"><div class="wrap"><span>Consejo de Creativos · Consultoría creativa estratégica · Ciudad de México</span><span>Personas que impulsan la creatividad de las marcas</span></div></footer>
+
+<script>
+function cdcSend(data){
+  var c=window.CDC_CONFIG||{},url=c.formEndpoint,body={};
+  for(var k in data)body[k]=data[k];
+  if(c.web3formsKey){
+    /* Web3Forms: usa sus nombres de campo para asunto y responder a */
+    url="https://api.web3forms.com/submit";
+    body.access_key=c.web3formsKey;
+    if(body._subject){body.subject=body._subject;delete body._subject;}
+    if(body._replyto){body.replyto=body._replyto;delete body._replyto;}
+    body.from_name="Sitio Consejo de Creativos";
+  }
+  if(!url)return Promise.reject({code:'sin_endpoint'});
+  return fetch(url,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(body)}).then(function(r){
+    if(!r.ok)throw{code:'http_'+r.status};
+    return r.json().catch(function(){return {};}).then(function(j){if(j&&(j.success===false||j.success==="false"))throw{code:'rechazado',message:j.message};return r;});
+  });
+}
+(function(){
+  "use strict";
+  var REQ='req';
+  var SECCIONES=[
+    {id:'tu',t:'Tú y tu marca',tip:'Para saber con quién hablamos y qué marca vamos a trabajar.',campos:[
+      {k:'nombre',l:'Tu nombre',req:1,ac:'name'},
+      {k:'correo',l:'Correo',req:1,type:'email',ac:'email'},
+      {k:'empresa',l:'Empresa',req:1,ac:'organization'},
+      {k:'puesto',l:'Tu puesto',ac:'organization-title'},
+      {k:'marca',l:'Marca o producto a comunicar'},
+      {k:'sitio',l:'Sitio web o redes',ac:'url'}]},
+    {id:'problema',t:'El problema de negocio',tip:'Casi siempre el primer problema que contamos es un síntoma, y está bien. Cuéntanos lo que ves; encontrar la causa de fondo es nuestro trabajo.',campos:[
+      {k:'problema',l:'¿Qué está pasando en tu negocio?',req:1,area:1,ph:'Ej. Nuestras ventas bajaron 15% desde que entró un competidor con precio más bajo.'},
+      {k:'porque_ahora',l:'¿Por qué ahora?',area:1,ph:'¿Qué detonó este proyecto en este momento?'},
+      {k:'si_no_hacemos',l:'¿Qué pasa si no hacemos nada?',area:1},
+      {k:'otros_factores',l:'¿Hay algo de producto, precio o distribución que también influya?',area:1,help:'La comunicación mueve percepciones e intención de compra, pero no arregla una falla operativa. Saberlo nos ayuda a separar qué le toca a la marca y qué al negocio.'}]},
+    {id:'objetivos',t:'Ambición y objetivos',tip:'Separamos lo que esperas del negocio de lo que esperas de la marca, y acordamos desde hoy cómo se va a medir.',campos:[
+      {k:'objetivo_negocio',l:'Objetivo de negocio',req:1,area:1,ph:'Ej. Recuperar 5 puntos de participación de mercado en 12 meses.'},
+      {k:'meta_marca',l:'Meta de marca',area:1,ph:'Ej. Que nos vean como la opción premium de la categoría.'},
+      {k:'kpis',l:'¿Cómo vas a medir el éxito?',area:1,ph:'Indicadores y plazo. Ej. ventas mensuales, registros, consideración.'},
+      {k:'exito',l:'Si esto sale increíble, ¿qué cambia para ti?',area:1}]},
+    {id:'audiencia',t:'Tu audiencia',tip:'Con el perfil comercial nos basta para empezar. Después lo convertimos en personas reales, con tensiones reales.',campos:[
+      {k:'audiencia',l:'¿A quién le vendes?',req:1,area:1,ancho:1,ph:'Edad, género, nivel socioeconómico, ciudad o región, tipo de cliente…'},
+      {k:'tipo_audiencia',l:'Tipo de cliente',sel:['Consumidor final','Empresas (B2B)','Ambos']},
+      {k:'canales_compra',l:'¿Dónde y cómo te compran?'},
+      {k:'decisor',l:'¿Quién decide la compra y quién usa el producto?',ancho:1}]},
+    {id:'contexto',t:'Mercado y competencia',tip:'Lo que ya probaste nos ahorra repetir errores, y lo que hace tu competencia nos dice dónde hay espacio.',campos:[
+      {k:'competidores',l:'Competidores directos e indirectos',area:1,ph:'¿Quiénes son y qué han hecho últimamente?'},
+      {k:'campanas_previas',l:'Campañas anteriores: ¿qué funcionó y qué no?',area:1},
+      {k:'tendencias',l:'Tendencias que ves en tu categoría',area:1}]},
+    {id:'alcance',t:'Lo que crees que necesitas',tip:'Es tu punto de partida, no un compromiso. Si el problema pide otra cosa, te lo vamos a decir.',campos:[
+      {k:'entregables',l:'Marca lo que tengas en mente',multi:['Estrategia','Campaña en redes','Audiovisual','Empaque','Punto de venta','Activaciones','Relaciones públicas','Fuerza de ventas','Compra de medios','Identidad de marca']},
+      {k:'alcance_detalle',l:'Detalles del alcance',area:1,ph:'Piezas, formatos, canales, cantidades…'}]},
+    {id:'presupuesto',t:'Presupuesto',tip:'Conocer el presupuesto real evita proponerte algo que no se puede ejecutar. Queda entre tú y el Consejo.',campos:[
+      {k:'presupuesto_rango',l:'Rango total (MXN)',sel:['Todavía no está definido','Menos de $250 mil','$250 mil a $1 millón','$1 a $3 millones','$3 a $10 millones','Más de $10 millones']},
+      {k:'presupuesto_incluye',l:'Qué debe cubrir',multi:['Producción','Honorarios','Medios','Activaciones','Imprevistos']},
+      {k:'presupuesto_notas',l:'Notas del presupuesto',area:1,ph:'Topes, desglose, cómo se aprueba…'}]},
+    {id:'tiempos',t:'Tiempos',tip:'Con la fecha de salida armamos la ruta crítica hacia atrás: propuesta, revisiones, producción y aprobaciones.',campos:[
+      {k:'fecha_lanzamiento',l:'Fecha de lanzamiento o salida al aire',ph:'Ej. 1 de marzo de 2027'},
+      {k:'fecha_inamovible',l:'¿La fecha es inamovible?',sel:['Sí, es inamovible','Tiene margen']},
+      {k:'hitos',l:'Otros hitos',area:1,ancho:1,ph:'Entrega de propuesta, rondas de revisión, aprobaciones legales…'}]},
+    {id:'mandatorios',t:'Mandatorios y material',tip:'Lo que no es negociable, y lo que nos puedes compartir para entender tu negocio a fondo.',campos:[
+      {k:'mandatorios',l:'Mandatorios',area:1,ph:'Manual de identidad, logos, tipografías, menciones legales…'},
+      {k:'restricciones',l:'Restricciones',area:1,ph:'Claims no permitidos, temas prohibidos, promociones o fechas fijas…'},
+      {k:'material',l:'Material que nos puedes compartir',area:1,ancho:1,ph:'Links a estudios, data de ventas, investigaciones, campañas…'}]}
+  ];
+  var CAMPOS=[],POR={};
+  SECCIONES.forEach(function(s,i){s.n=('0'+(i+1)).slice(-2);s.campos.forEach(function(c){c.sec=s;CAMPOS.push(c);POR[c.k]=c;});});
+  var OBLIG=CAMPOS.filter(function(c){return c.req;});
+  var CLAVE='cdc-brief-v1';
+  var form=document.getElementById('brief-form'),indice=document.getElementById('indice');
+  var sugeridos={};
+
+  function esc(t){return String(t).replace(/[&<>"]/g,function(m){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m];});}
+  function etiqueta(c){return '<span class="lab">'+esc(c.l)+(c.req?' <span class="req" aria-hidden="true">*</span>':'')+'<span class="sug">Sugerido</span></span>';}
+
+  /* pintar formulario e índice */
+  var html='',ind='';
+  SECCIONES.forEach(function(s){
+    html+='<section class="sec" id="sec-'+s.id+'" aria-labelledby="t-'+s.id+'"><div class="sec-cab"><span class="n">'+s.n+'</span><h3 id="t-'+s.id+'">'+esc(s.t)+'</h3><p class="tip">'+esc(s.tip)+'</p></div><div class="campos">';
+    s.campos.forEach(function(c){
+      var id='b-'+c.k,cls='campo'+((c.area||c.multi||c.ancho)?' ancho':''),req=c.req?' required aria-required="true"':'',err='<span class="error-campo" id="'+id+'-err" hidden></span>';
+      var help=c.help?'<span class="ayuda" id="'+id+'-ayuda">'+esc(c.help)+'</span>':'';
+      var desc=' aria-describedby="'+id+'-err'+(c.help?' '+id+'-ayuda':'')+'"';
+      if(c.multi){
+        html+='<fieldset class="'+cls+'" id="'+id+'" data-k="'+c.k+'"><legend>'+etiqueta(c)+'</legend><div class="chips">'+c.multi.map(function(o){return '<label class="chip"><input type="checkbox" name="'+c.k+'" value="'+esc(o)+'"><span>'+esc(o)+'</span></label>';}).join('')+'</div>'+help+'</fieldset>';
+      }else if(c.sel){
+        html+='<label class="'+cls+'" for="'+id+'" data-k="'+c.k+'">'+etiqueta(c)+'<select id="'+id+'" name="'+c.k+'"'+req+desc+'><option value="">Elige una opción</option>'+c.sel.map(function(o){return '<option>'+esc(o)+'</option>';}).join('')+'</select>'+help+err+'</label>';
+      }else if(c.area){
+        html+='<label class="'+cls+'" for="'+id+'" data-k="'+c.k+'">'+etiqueta(c)+'<textarea id="'+id+'" name="'+c.k+'" rows="3" maxlength="3000"'+(c.ph?' placeholder="'+esc(c.ph)+'"':'')+req+desc+'></textarea>'+help+err+'</label>';
+      }else{
+        html+='<label class="'+cls+'" for="'+id+'" data-k="'+c.k+'">'+etiqueta(c)+'<input id="'+id+'" name="'+c.k+'" type="'+(c.type||'text')+'" maxlength="300"'+(c.ac?' autocomplete="'+c.ac+'"':'')+(c.ph?' placeholder="'+esc(c.ph)+'"':'')+req+desc+'>'+help+err+'</label>';
+      }
+    });
+    html+='</div></section>';
+    ind+='<li><a href="#sec-'+s.id+'" data-sec="'+s.id+'"><span class="in">'+s.n+'</span><span>'+esc(s.t)+'</span><span class="ok" aria-hidden="true">✓</span></a></li>';
+  });
+  form.innerHTML=html;indice.innerHTML=ind;
+
+  /* leer y escribir valores */
+  function get(k){var c=POR[k];if(c.multi)return [].slice.call(form.querySelectorAll('input[name="'+k+'"]:checked')).map(function(i){return i.value;});var el=form.elements[k];return el?el.value.trim():'';}
+  function set(k,v){var c=POR[k];if(c.multi){var vs=Array.isArray(v)?v:[];[].slice.call(form.querySelectorAll('input[name="'+k+'"]')).forEach(function(i){i.checked=vs.indexOf(i.value)>-1;});return;}
+    var el=form.elements[k];if(!el)return;if(c.sel&&v&&c.sel.indexOf(v)<0)return;el.value=v||'';}
+  function vacio(k){var v=get(k);return Array.isArray(v)?!v.length:!v;}
+  function caja(k){return form.querySelector('[data-k="'+k+'"]');}
+  function marcar(k,on){var b=caja(k);if(!b)return;if(on){sugeridos[k]=1;b.classList.add('es-sugerido');}else{delete sugeridos[k];b.classList.remove('es-sugerido');}}
+
+  /* guardado en el navegador */
+  var hTexto=document.getElementById('h-texto'),guardado=document.getElementById('guardado'),tGuardar=0;
+  function guardar(){clearTimeout(tGuardar);tGuardar=setTimeout(function(){
+    var v={};CAMPOS.forEach(function(c){v[c.k]=get(c.k);});
+    try{localStorage.setItem(CLAVE,JSON.stringify({v:v,s:Object.keys(sugeridos),h:hTexto.value,t:Date.now()}));guardado.textContent='Guardado en este navegador.';}catch(e){guardado.textContent='Este navegador no permite guardar tu avance. Usa “Copiar como texto” como respaldo.';}
+  },350);}
+  try{var g=JSON.parse(localStorage.getItem(CLAVE)||'null');if(g&&g.v){CAMPOS.forEach(function(c){if(g.v[c.k]!=null)set(c.k,g.v[c.k]);});(g.s||[]).forEach(function(k){if(POR[k]&&!vacio(k))marcar(k,true);});if(g.h)hTexto.value=g.h;guardado.textContent='Recuperamos tu avance guardado en este navegador.';}}catch(e){}
+
+  /* avance */
+  var avT=document.getElementById('av-texto'),avB=document.getElementById('av-barra'),amT=document.getElementById('am-texto'),amB=document.getElementById('am-barra'),resumen=document.getElementById('e-resumen');
+  function avance(){
+    var n=OBLIG.filter(function(c){return !vacio(c.k)&&(c.type!=='email'||correoOk(get(c.k)));}).length,t='Obligatorios: '+n+' de '+OBLIG.length;
+    avT.textContent=amT.textContent=t;avB.style.width=amB.style.width=(n/OBLIG.length*100)+'%';
+    SECCIONES.forEach(function(s){var lleno=s.campos.some(function(c){return !vacio(c.k);})&&s.campos.filter(function(c){return c.req;}).every(function(c){return !vacio(c.k);});var o=indice.querySelector('[data-sec="'+s.id+'"] .ok');if(o)o.classList.toggle('lleno',lleno);});
+    var ns=Object.keys(sugeridos).length,nl=CAMPOS.filter(function(c){return !vacio(c.k);}).length;
+    resumen.textContent=nl?('Llevas '+nl+' de '+CAMPOS.length+' campos'+(ns?'. '+ns+(ns===1?' sigue marcado':' siguen marcados')+' como Sugerido: revísalos antes de enviar.':'.')):'Llena el brief arriba o cuéntanoslo con tus palabras.';
+  }
+  function correoOk(v){return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);}
+  function cambio(e){
+    var b=e.target.closest('[data-k]');if(!b)return;var k=b.getAttribute('data-k');
+    if(e.isTrusted)marcar(k,false);
+    var el=document.getElementById('b-'+k+'-err');if(el&&!el.hidden&&!vacio(k)){el.hidden=true;var f=form.elements[k];if(f&&f.removeAttribute)f.removeAttribute('aria-invalid');}
+    avance();guardar();
+  }
+  form.addEventListener('input',cambio);form.addEventListener('change',cambio);
+  hTexto.addEventListener('input',function(){cuenta();guardar();});
+  avance();
+
+  /* índice: sección visible */
+  if('IntersectionObserver' in window){var links=[].slice.call(indice.querySelectorAll('a'));var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;var id=e.target.id.slice(4);links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('data-sec')===id?'true':'false');});});},{rootMargin:'-35% 0px -60% 0px'});SECCIONES.forEach(function(s){io.observe(document.getElementById('sec-'+s.id));});}
+
+  /* autollenado */
+  var hCuenta=document.getElementById('h-cuenta'),hBtn=document.getElementById('h-llenar'),hStatus=document.getElementById('h-status'),hRes=document.getElementById('h-resultado');
+  function cuenta(){hCuenta.textContent=hTexto.value.length.toLocaleString('es-MX')+' / 8,000';}cuenta();
+  function decir(el,t,k){el.textContent=t;el.dataset.kind=k||'';}
+  var MSJ={muy_corta:'Cuéntanos un poco más: con un par de frases sobre tu marca y lo que necesitas basta.',muy_larga:'Tu historia pasa de 8,000 caracteres. Recórtala un poco y vuelve a intentar.',sin_llave:'El autollenado todavía no está activo. Puedes llenar el brief abajo; tu historia se queda guardada.',ocupado:'Hay mucha demanda en este momento. Intenta de nuevo en un minuto.',rechazo:'No pudimos procesar esta historia. Llena el brief abajo y nosotros la revisamos.'};
+  hBtn.addEventListener('click',function(){
+    var h=hTexto.value.trim();
+    if(h.length<40){decir(hStatus,MSJ.muy_corta,'err');hTexto.focus();return;}
+    hBtn.disabled=true;hBtn.textContent='Leyendo tu historia…';decir(hStatus,'Esto toma unos segundos.');hRes.hidden=true;
+    fetch('/api/brief-autollenar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({historia:h})})
+    .then(function(r){return r.json().catch(function(){return {};}).then(function(j){if(!r.ok)throw j;return j;});})
+    .then(function(j){
+      var c=j.campos||{},llenos=[],ocupados=0;
+      CAMPOS.forEach(function(f){var v=c[f.k];var tiene=Array.isArray(v)?v.length:(typeof v==='string'&&v.trim());if(!tiene)return;
+        if(f.type==='email'&&!correoOk(String(v).trim()))return;
+        if(!vacio(f.k)){ocupados++;return;}
+        set(f.k,Array.isArray(v)?v:String(v).trim());if(!vacio(f.k)){marcar(f.k,true);llenos.push(f);}});
+      avance();guardar();
+      var falt=(c.faltantes||[]).filter(function(x){return typeof x==='string'&&x.trim();}).slice(0,5);
+      var faltOb=OBLIG.filter(function(f){return vacio(f.k);});
+      var out='<p><b>'+(llenos.length?('Llenamos '+llenos.length+(llenos.length===1?' campo':' campos')):'No encontramos datos nuevos para los campos vacíos')+'.</b> '+(llenos.length?'Están marcados como Sugerido hasta que los edites.':'')+(ocupados?' No tocamos '+ocupados+(ocupados===1?' campo que ya habías llenado.':' campos que ya habías llenado.'):'')+'</p>';
+      if(faltOb.length)out+='<div><span class="k">Falta para enviar</span><ul>'+faltOb.map(function(f){return '<li><a href="#b-'+f.k+'">'+esc(f.l)+'</a></li>';}).join('')+'</ul></div>';
+      if(falt.length)out+='<div><span class="k">Para cotizar mejor, cuéntanos</span><ul>'+falt.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
+      out+='<a class="btn secundario" href="#brief">Revisar el brief</a>';
+      hRes.innerHTML=out;hRes.hidden=false;decir(hStatus,'');
+    })
+    .catch(function(e){decir(hStatus,MSJ[e&&e.error]||'No pudimos llenar el brief. Revisa tu conexión e intenta de nuevo.','err');})
+    .then(function(){hBtn.disabled=false;hBtn.textContent='Llenar el brief por mí';});
+  });
+
+  /* texto plano */
+  function comoTexto(){
+    var l=['BRIEF DE CLIENTE · CONSEJO DE CREATIVOS',''];
+    SECCIONES.forEach(function(s){
+      var filas=s.campos.filter(function(c){return !vacio(c.k);});if(!filas.length)return;
+      l.push(s.n+'. '+s.t.toUpperCase());
+      filas.forEach(function(c){var v=get(c.k);l.push(c.l+(sugeridos[c.k]?' (sugerido)':'')+': '+(Array.isArray(v)?v.join(', '):v));});
+      l.push('');
+    });
+    return l.join('\n').trim();
+  }
+
+  /* validar */
+  var eStatus=document.getElementById('e-status');
+  function validar(){
+    var malos=[];
+    CAMPOS.forEach(function(c){var el=document.getElementById('b-'+c.k+'-err');if(el){el.hidden=true;var f=form.elements[c.k];if(f&&f.removeAttribute)f.removeAttribute('aria-invalid');}});
+    OBLIG.forEach(function(c){var v=get(c.k),msg='';if(!v)msg='Este dato es obligatorio.';else if(c.type==='email'&&!correoOk(v))msg='Revisa el correo: parece incompleto.';
+      if(msg){malos.push(c);var el=document.getElementById('b-'+c.k+'-err');el.textContent=msg;el.hidden=false;form.elements[c.k].setAttribute('aria-invalid','true');}});
+    return malos;
+  }
+
+  /* enviar */
+  var eBtn=document.getElementById('e-enviar');
+  eBtn.addEventListener('click',function(){
+    var malos=validar();
+    if(malos.length){
+      eStatus.dataset.kind='err';eStatus.innerHTML='Falta'+(malos.length>1?'n':'')+' '+malos.length+(malos.length>1?' datos':' dato')+' para enviar:<ul>'+malos.map(function(c){return '<li><a href="#b-'+c.k+'">'+esc(c.l)+'</a></li>';}).join('')+'</ul>';
+      var f=form.elements[malos[0].k];f.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(function(){f.focus({preventScroll:true});},400);return;
+    }
+    var d={_subject:'Nuevo brief: '+get('empresa')+(get('marca')&&get('marca')!==get('empresa')?' · '+get('marca'):''),origen:'brief',_replyto:get('correo')};
+    CAMPOS.forEach(function(c){if(vacio(c.k))return;var v=get(c.k);d[c.sec.n+' '+c.l]=(Array.isArray(v)?v.join(', '):v)+(sugeridos[c.k]?' [sugerido, sin editar]':'');});
+    if(hTexto.value.trim())d['Historia original']=hTexto.value.trim();
+    d['Brief en texto']=comoTexto();
+    eBtn.disabled=true;decir(eStatus,'Enviando…');
+    cdcSend(d).then(function(){decir(eStatus,'Listo, '+get('nombre').split(' ')[0]+'. Recibimos tu brief y te escribimos a '+get('correo')+' para afinarlo contigo.','ok');})
+    .catch(function(){decir(eStatus,'No se pudo enviar. Revisa tu conexión e intenta de nuevo, o usa “Copiar como texto” y mándanoslo por correo.','err');})
+    .then(function(){eBtn.disabled=false;});
+  });
+
+  /* copiar */
+  document.getElementById('e-copiar').addEventListener('click',function(){
+    var t=comoTexto();if(t.split('\n').length<3){decir(eStatus,'Todavía no hay nada que copiar.','err');return;}
+    function listo(){decir(eStatus,'Copiamos tu brief como texto. Pégalo donde quieras guardarlo.','ok');}
+    function plan(){var a=document.createElement('textarea');a.value=t;a.setAttribute('readonly','');a.style.position='fixed';a.style.opacity='0';document.body.appendChild(a);a.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(a);ok?listo():decir(eStatus,'Tu navegador no dejó copiar. Selecciona el texto del brief manualmente.','err');}
+    if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(listo,plan);else plan();
+  });
+
+  /* borrar */
+  var eBorrar=document.getElementById('e-borrar'),armado=false,tArm=0;
+  eBorrar.addEventListener('click',function(){
+    if(!armado){armado=true;eBorrar.textContent='Toca otra vez para borrar todo';clearTimeout(tArm);tArm=setTimeout(function(){armado=false;eBorrar.textContent='Borrar todo y empezar de nuevo';},4000);return;}
+    armado=false;clearTimeout(tArm);eBorrar.textContent='Borrar todo y empezar de nuevo';
+    CAMPOS.forEach(function(c){set(c.k,c.multi?[]:'');marcar(c.k,false);});hTexto.value='';cuenta();hRes.hidden=true;
+    try{localStorage.removeItem(CLAVE);}catch(e){}
+    validar();CAMPOS.forEach(function(c){var el=document.getElementById('b-'+c.k+'-err');if(el)el.hidden=true;var f=form.elements[c.k];if(f&&f.removeAttribute)f.removeAttribute('aria-invalid');});
+    avance();decir(eStatus,'Listo, empezamos de cero.');guardado.textContent='Tu avance se guarda en este navegador.';
+  });
+})();
+(function(){
+  /* Ondas (componente del sistema de diseño), versión clara sobre perla */
+  var cv=document.getElementById('ondas');if(!cv||!cv.getContext)return;
+  var ctx=cv.getContext('2d'),raf=0,t0=performance.now(),W=0,H=0,dpr=Math.min(window.devicePixelRatio||1,2),visible=true;
+  var cs=getComputedStyle(cv),cols=['--tornasol-oro','--tornasol-coral','--tornasol-rosa','--tornasol-lila','--tornasol-agua'].map(function(v){return cs.getPropertyValue(v).trim()||'#f5c04e';});
+  var still=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches,parts=[];
+  function claro(){var bg=(getComputedStyle(cv.parentNode).getPropertyValue('--hoja')||'').trim();return !/^#(1|2)/.test(bg);}
+  function size(){var r=cv.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+  for(var i=0;i<70;i++)parts.push({x:Math.random(),y:Math.random(),r:.6+Math.random()*2.2,v:.004+Math.random()*.012,f:Math.random()*6.28,c:cols[i%5]});
+  function path(k,t,base,amp,fq){ctx.beginPath();for(var x=0;x<=W;x+=6){var u=x/W,y=base+Math.sin(u*6.28*fq+t*(.5+k*.12)+k)*amp*(.6+.4*Math.sin(t*.3+u*3));x?ctx.lineTo(x,y):ctx.moveTo(x,y);}}
+  function frame(now){
+    var t=Math.max(0,(now-t0)/1000),cl=claro();ctx.clearRect(0,0,W,H);ctx.globalCompositeOperation=cl?'source-over':'lighter';
+    for(var k=0;k<5;k++){
+      var g=ctx.createLinearGradient(0,0,W,0),sh=(t*.04+k*.2)%1;
+      for(var j=0;j<=5;j++)g.addColorStop(j/5,cols[(j+k+Math.floor(sh*5))%5]);
+      var base=H*(.62+k*.07),amp=H*(.06+.02*k),fq=.9+k*.35;
+      path(k,t,base,amp,fq);ctx.save();ctx.lineTo(W,H);ctx.lineTo(0,H);ctx.closePath();ctx.fillStyle=g;ctx.globalAlpha=cl?.16:.07;ctx.fill();ctx.restore();
+      path(k,t,base,amp,fq);ctx.strokeStyle=g;ctx.shadowColor=cl?'rgba(255,255,255,.9)':cols[k];ctx.shadowBlur=cl?10:14;ctx.globalAlpha=cl?.7+k*.06:.45+k*.08;ctx.lineWidth=(cl?2:1.4)+(4-k)*.7;ctx.stroke();ctx.shadowBlur=0;
+    }
+    for(var i=0;i<parts.length;i++){
+      var q=parts[i];if(!still){q.y-=q.v*.096;if(q.y<-.05){q.y=1.05;q.x=Math.random();}}
+      var tw=.35+.65*Math.abs(Math.sin(t*1.4+q.f)),px=q.x*W+Math.sin(t*.6+q.f)*8,py=q.y*H,rg=ctx.createRadialGradient(px,py,0,px,py,q.r*4);
+      if(cl){rg.addColorStop(0,'rgba(255,255,255,1)');rg.addColorStop(.35,q.c);}else rg.addColorStop(0,q.c);rg.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.globalAlpha=tw;ctx.fillStyle=rg;ctx.beginPath();ctx.arc(px,py,q.r*4,0,6.28);ctx.fill();
+    }
+    ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';
+    if(!still&&visible)raf=requestAnimationFrame(frame);
+  }
+  size();frame(t0+4000);
+  if(!still)raf=requestAnimationFrame(frame);
+  if(window.ResizeObserver)new ResizeObserver(function(){size();if(still||!visible)frame(t0+4000);}).observe(cv);
+  if(window.IntersectionObserver&&!still)new IntersectionObserver(function(es){var v=es[0].isIntersecting;if(v&&!visible){visible=true;raf=requestAnimationFrame(frame);}else if(!v){visible=false;cancelAnimationFrame(raf);}}).observe(cv);
+})();
+
+/* menú: se compacta al bajar y marca la sección visible */
+(function(){
+  var nav=document.querySelector('nav.menu');if(!nav)return;
+  var on=false,tick=false;
+  function upd(){tick=false;var c=window.scrollY>24;if(c!==on){on=c;nav.classList.toggle('compacta',c);}}
+  window.addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(upd);}},{passive:true});upd();
+  var links=[].slice.call(nav.querySelectorAll('.navlinks a[href^="#"]'));
+  if(!('IntersectionObserver' in window))return;
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;links.forEach(function(a){a.setAttribute('aria-current',a.getAttribute('href')==='#'+e.target.id?'true':'false');});});},{rootMargin:'-45% 0px -50% 0px'});
+  links.forEach(function(a){var s=document.getElementById(a.getAttribute('href').slice(1));if(s)io.observe(s);});
+})();
+</script>
+</body>
+</html>
