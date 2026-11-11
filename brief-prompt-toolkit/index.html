@@ -173,7 +173,7 @@ input[type=range]{width:100%;accent-color:var(--idea)}
 .privacy::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--idea);flex:none;transform:translateY(-1px)}
 
 .intro-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
-.intro-list li{display:grid;grid-template-columns:auto 1fr;gap:.8rem;align-items:baseline;color:var(--tinta-suave)}
+.intro-list li{display:grid;grid-template-columns:5.5rem minmax(0,1fr);gap:.8rem;align-items:baseline;color:var(--tinta-suave)}
 .intro-list li b{font-family:var(--f-mono);font-weight:500;font-size:var(--step--1);color:var(--idea-texto)}
 
 /* el prompt en vivo */
@@ -261,6 +261,7 @@ input[type=range]{width:100%;accent-color:var(--idea)}
 @keyframes vista-der{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:none}}
 @keyframes vista-izq{from{opacity:0;transform:translateX(-28px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.bench .sheet,.bench .left{animation:none!important}}
+.hand[hidden],footer.ondas[hidden]{display:none}
 </style>
 <style>html,body{margin:0}:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}img{max-width:100%}[hidden]{display:none!important}</style>
 </head>
@@ -526,7 +527,7 @@ function cdcSend(data){
   var privacy='<p class="privacy">Usamos tus respuestas para armar tu prompt. Solo las ve el Consejo de Creativos cuando tú decides compartirlas para trabajar con nosotros.</p>';
 
   var RENDER={
-    0:function(){return '<span class="eyebrow">Toolkit del Brief</span><h1>Arma el prompt que convierte a tu IA en <em>tu mejor redactor de briefs</em>.</h1><p class="why">Seis preguntas rápidas. A la derecha vas a ver cómo tu prompt se escribe con cada respuesta. Al final te lo llevas listo para pegar en ChatGPT, Claude, Gemini o la que uses.</p><ul class="intro-list"><li><b>3 min</b><span>Sin registro previo. Contestas con clics.</span></li><li><b>A la medida</b><span>Se ajusta a tu marca, tu data y lo que hoy falla en tus briefs.</span></li><li><b>Hecho por personas</b><span>Usa el método de planning del Consejo: problema real, tensión humana y GET / TO / BY.</span></li></ul>'+actions("Empezar",false);},
+    0:function(){return '<span class="eyebrow">Toolkit del Brief</span><h1>Un buen brief te ahorra <em>semanas de retrabajo</em>.</h1><p class="why">Cuando estás metido en un problema de negocio es difícil ser objetivo. Este toolkit te hace las preguntas que haría un planner y arma el prompt para que tu IA te ayude a escribir un brief claro.</p><ul class="intro-list"><li><b>3 min</b><span>Seis preguntas con clics, sin registro previo.</span></li><li><b>A la medida</b><span>Se ajusta a tu marca, tu data y lo que hoy falla en tus briefs.</span></li><li><b>Hecho por personas</b><span>Usa el método de planning del Consejo: problema real, tensión humana y GET / TO / BY.</span></li><li><b>Para tu IA</b><span>Te llevas el prompt listo para pegar en ChatGPT, Claude, Gemini o la que uses.</span></li></ul>'+actions("Empezar",false);},
     1:function(){return '<h2>Para empezar, ¿cómo te llamas?</h2><p class="why">Tu prompt va a hablarle a la IA <b>como si fueras tú</b>. Con tu nombre y tu rol sabe a quién le está escribiendo.</p><label class="field" for="i-nombre"><span>Tu nombre</span><input type="text" id="i-nombre" autocomplete="given-name" maxlength="80" value="'+esc(S.nombre)+'" placeholder="Ej. Mariana"></label><div class="field"><span>Tu rol</span><div class="chips sm" data-single="rol">'+ROLES.map(function(r){return chip(r,S.rol===r,'data-val="'+esc(r)+'"');}).join("")+'</div></div>'+actions("Siguiente",true)+privacy;},
     2:function(){var n=S.nombre?esc(S.nombre.split(" ")[0])+", ¿":"¿";return '<h2>'+n+'para qué marca escribes los briefs?</h2><p class="why">Un brief bueno nace del <b>contexto de la marca</b>. La industria le dice a la IA qué reglas del juego aplican.</p><label class="field" for="i-empresa"><span>Marca o empresa</span><input type="text" id="i-empresa" autocomplete="organization" maxlength="100" value="'+esc(S.empresa)+'" placeholder="Ej. Café Altura"></label><div class="field"><span>Industria</span><div class="chips sm" data-single="industria">'+INDUSTRIAS.concat(["Otra"]).map(function(r){return chip(r,S.industria===r,'data-val="'+esc(r)+'"');}).join("")+'</div></div><label class="field" for="i-otra" '+(S.industria==="Otra"?"":"hidden")+' id="otra-wrap"><span>¿Cuál?</span><input type="text" id="i-otra" maxlength="60" value="'+esc(S.industriaOtra)+'"></label>'+actions("Siguiente",true);},
     3:function(){return '<h2>¿Qué te pidieron?</h2><p class="why">Casi siempre el encargo llega como <b>tarea o síntoma</b>: “sube ventas”, “haz un video”. Tu prompt va a obligar a la IA a encontrar el problema real detrás antes de escribir.</p><div class="field"><span>El encargo</span><div class="chips" data-single="encargo">'+opts(ENCARGOS,"encargo")+'</div></div><div class="field"><span>Quién recibe el brief</span><div class="chips" data-single="receptor">'+Object.keys(RECEPTORES).map(function(k){var l={agencia:"Agencia externa",interno:"Equipo interno",freelance:"Freelancers",ia:"Herramientas de IA"}[k];return chip(l,S.receptor===k,'data-val="'+k+'"',D_REC[k]);}).join("")+'</div></div>'+actions("Siguiente",true);},
@@ -627,6 +628,8 @@ function cdcSend(data){
     card.className="card"+(step===0?" cover":"");void card.offsetWidth;card.classList.add("deal");
     document.getElementById("deck").dataset.left=Math.max(0,Math.min(2,7-step));
     paintHand();
+    var handEl=document.querySelector(".hand");if(handEl)handEl.hidden=step===0;
+    var pieEl=document.querySelector("footer.ondas");if(pieEl){var oculto=!(step>6&&unlocked);if(pieEl.hidden!==oculto){pieEl.hidden=oculto;if(!oculto)setTimeout(function(){window.dispatchEvent(new Event("resize"));},0);}}
     paintProgress();paintPrompt();remember();syncMobile();
     var first=card.querySelector("input[type=text],input[type=email]");
     if(first&&step>0&&window.innerWidth>900)first.focus({preventScroll:true});
