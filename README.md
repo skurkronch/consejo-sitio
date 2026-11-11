@@ -4,6 +4,8 @@ Sitio estático (sin build). Vercel lo publica tal cual.
 
 - `index.html` · la landing
 - `brief-prompt-toolkit/index.html` · Toolkit del Brief
+- `brief/index.html` · plataforma de brief para prospectos (/brief/)
+- `api/brief-autollenar.js` · función de Vercel que llena el brief con IA a partir de la historia del prospecto (necesita `ANTHROPIC_API_KEY` en Vercel)
 - `config.js` · adónde llegan los formularios
 - `favicon.svg`, `og.png` · ícono e imagen para compartir
 

@@ -1,0 +1,9 @@
+{
+  "name": "consejo-sitio",
+  "private": true,
+  "type": "module",
+  "description": "Sitio estático de Consejo de Creativos. Solo api/ usa dependencias (funciones de Vercel).",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0"
+  }
+}
